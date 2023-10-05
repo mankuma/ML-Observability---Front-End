@@ -9,3 +9,8 @@
     height: 35vh!important;
     overflow-y: auto;
 }
+
+.main-table {
+    height: calc(100vh - 5rem);
+    overflow-y: auto;
+}

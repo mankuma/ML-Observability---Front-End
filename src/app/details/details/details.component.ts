@@ -14,6 +14,32 @@ Chart.register(...registerables);
 export class DetailsComponent implements OnInit {
   data = [];
   routerName: string = '';
+  public kpiCards = [
+    {
+      name: "Emails Received",
+      count: 0,
+      // background: '#c6c7f8',
+      background: '#ffffff'
+    },
+    {
+      name: "Emails After ETL",
+      count: '17,641',
+      //background: '#baedbd'
+      background: '#ffffff'
+    },
+    {
+      name: 'Emails Customer Branch',
+      count: 1,
+      //background: '#b5bffd'
+      background: '#ffffff'
+    },
+    {
+      name: 'Emails AM Branch',
+      count: 1,
+      //background: '#b5bffd'
+      background: '#ffffff'
+    }
+  ];
 
   constructor(private userService: UserService, private router: Router) {
 
