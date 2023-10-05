@@ -17,25 +17,25 @@ export class DetailsComponent implements OnInit {
   public kpiCards = [
     {
       name: "Emails Received",
-      count: 0,
+      count: 100,
       // background: '#c6c7f8',
       background: '#ffffff'
     },
     {
       name: "Emails After ETL",
-      count: '17,641',
+      count: 55,
       //background: '#baedbd'
       background: '#ffffff'
     },
     {
       name: 'Emails Customer Branch',
-      count: 1,
+      count: 76,
       //background: '#b5bffd'
       background: '#ffffff'
     },
     {
       name: 'Emails AM Branch',
-      count: 1,
+      count: 24,
       //background: '#b5bffd'
       background: '#ffffff'
     }
