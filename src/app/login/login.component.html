@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div style="display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;width: 100%; height: 100vh">
+            <!-- <img src="https://www.hightechdad.com/wp-content/uploads/2014/06/HTD-CDW-Red-Carpet-3.jpg" alt="login"
+                style="width: 100%;" /> -->
+            <p style="font-size: 60px;color: black">ML Observability</p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div style=" display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;width: 100%; height: 100vh">
+            <div class="card" style="width: 75%; margin: auto;">
+                <div class="card-body">
+                    <form (submit)="login(userData)">
+                        <div class="form-group">
+                            <label for="email">Email : </label>
+                            <input type="text" name="email" class="form-control" placeholder="Email"
+                                [(ngModel)]="userData.email">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="password">Password : </label>
+                            <input type="password" name="password" class="form-control" placeholder="********"
+                                [(ngModel)]="userData.password">
+                        </div>
+                        <div class="text-center mt-3">
+                            <input type="submit" class="btn btn-primary" value="Login">
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

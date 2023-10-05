@@ -1,0 +1,102 @@
+<div class="row ms-0 me-0 mt-3" *ngIf="routerName !== 'amanada_details'">
+    <div class="col-lg-6 mt-3 mb-3 ">
+        <div class="widget bx-show-black border border-dark">
+            <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">CPU Utilization</p>
+            <canvas class="bar w-100" id="myChart"></canvas>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mt-3 mb-3">
+        <div class="widget bx-show-black border border-dark">
+            <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Memory Utilization</p>
+            <canvas class="bar w-100" id="myChart1"></canvas>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="row ms-0 me-0 mt-3" *ngIf="routerName === 'amanada_details'">
+    <div class="col-lg-6 mt-3 mb-3 ">
+        <div class="widget bx-show-black border border-dark">
+            <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Generated Carts</p>
+            <canvas class="bar w-100" id="bar1"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-6 mt-3 mb-3">
+        <div class="widget bx-show-black border border-dark">
+            <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Converted Carts</p>
+            <canvas class="bar w-100" id="myChart3"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-6 mt-3 mb-3">
+        <div class="widget bx-show-black border border-dark">
+            <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Non Converted Carts</p>
+            <canvas class="bar w-100" id="ctx"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-6 mt-3 mb-3">
+        <div class="widget bx-show-black border border-dark">
+            <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Canceled Carts</p>
+            <canvas class="bar w-100" id="ctx1"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<div class="row ms-0 me-0 mt-5 px-2">
+    <div class="col-lg-12 py-3 px-2 fs-18 d-flex align-items-center clr-boston-red fw-bolder bg-white bx-shadow-black">
+        Prediction Models
+    </div>
+</div>
+
+<div class="filter-height mx-3 mt-3">
+    <table class="bg-tableheader mainTable">
+        <thead>
+            <tr>
+                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0">
+                    S.NO
+                </th>
+                <th Class="w-25 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0 border-start-0">
+                    Name
+                </th>
+                <th Class="w-15 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0 border-strat-0">
+                    Datatype
+                </th>
+                <th Class="w-15 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    Drift
+                </th>
+                <th Class="w-15 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    % Empty
+                </th>
+                <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    Distribution
+                </th>
+
+            </tr>
+        </thead>
+        <tbody class="bg-white tBody">
+            <tr>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0 clr-boston-red ff-p-sb pt-1">
+                    1
+                </td>
+                <td class="w-25 p-2 fs-14 border border-dark border-top-0  border-start-0 clr-boston-red ff-p-sb pt-1">
+                    Model
+                </td>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 clr-boston-red ff-p-sb pt-1">
+                    --
+                </td>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 ff-p-sb pt-1">
+                    0.01
+                </td>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
+                    27%
+                </td>
+                <td class="w-15 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
+                    17.82
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>

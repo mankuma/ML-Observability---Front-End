@@ -1,0 +1,60 @@
+<div class="filter-height mx-3 mt-3">
+    <table class="bg-tableheader mainTable">
+        <thead>
+            <tr>
+                <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0">
+                    CoworkerName
+                </th>
+                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0 border-start-0">
+                    CoworkerId
+                </th>
+                <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0 border-strat-0">
+                    CoworkerEmail
+                </th>
+                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    Year
+                </th>
+                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    Total Cart
+                </th>
+                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    Order Coverted
+                </th>
+                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    Order Not Coverted
+                </th>
+                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    Order Canceled
+                </th>
+            </tr>
+        </thead>
+        <tbody class="bg-white tBody">
+            <tr *ngFor="let name of list">
+                <td class="w-20 p-2 fs-14 border border-dark border-top-0 clr-boston-red ff-p-sb pt-1">
+                    <a class="cr-pointer text-decoration-none">{{name.coworkername}}</a>
+                </td>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 clr-boston-red ff-p-sb pt-1">
+                    {{name.coworkerid}}
+                </td>
+                <td class="w-20 p-2 fs-14 border border-dark border-top-0 border-start-0 clr-boston-red ff-p-sb pt-1">
+                    {{name.coworkeremail}}
+                </td>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0 clr-yellow ff-p-sb pt-1">
+                    {{name.Year}}
+                </td>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 clr-boston-red ff-p-sb pt-1">
+                    {{name.totalcart}}
+                </td>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 clr-boston-red ff-p-sb pt-1">
+                    {{name.ordercoverted}}
+                </td>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0 clr-yellow ff-p-sb pt-1">
+                    {{name.ordernotcoverted}}
+                </td>
+                <td class="w-10 p-2 fs-14 border border-dark border-top-0 clr-yellow ff-p-sb pt-1">
+                    {{name.canceled}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

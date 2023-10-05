@@ -1,0 +1,27 @@
+.filter-height {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 13rem);
+
+}
+
+.filter-height .mainTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.filter-height tr {
+    width: 100%;
+}
+
+.filter-height tr th {
+    position: sticky;
+    top: 0 !important;
+    z-index: 1 !important;
+
+
+}
+
+.filter-height tr td {
+    z-index: 0 !important;
+}
