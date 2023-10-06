@@ -30,7 +30,7 @@ import { TableauModule } from 'ngx-tableau';
     FormsModule,
     CommonModule,
     HttpClientModule,
-    TableauModule,
+    TableauModule
 
 
 

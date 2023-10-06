@@ -19,19 +19,23 @@ export class DetailsComponent implements OnInit {
     {
       name: "Emails Received",
       count: 'N/A',
+      key: "email_received"
 
     },
     {
       name: "Emails After ETL",
       count: 'N/A',
+      key: "email_after_etl"
     },
     {
       name: 'Emails Customer Branch',
       count: 'N/A',
+      key: "email_customer_branch"
     },
     {
       name: 'Emails AM Branch',
       count: 'N/A',
+      key: "email_AM_branch"
     }
   ];
 
@@ -60,13 +64,30 @@ export class DetailsComponent implements OnInit {
   }
 
   public getEmailcount() {
+    this.kpiCards = [];
     this.userService.getEmailcounters().subscribe((res: any) => {
       if (res['response'].length != 0) {
-        this.kpiCards = res['response'];
+        let data = this.list;
+        data.map((x: any) => {
+          res['response'].map((y: any) => {
+            if (x.key.toLowerCase() === y.name.toLowerCase()) {
+              x.count = y.count === null ? 'N/A' : y.count;
+            }
+          });
+          this.kpiCards.push(x);
+        });
+
       } else {
         this.kpiCards = this.list;
       }
     });
+    this.callApiMethod();
+  }
+
+  public callApiMethod() {
+    setTimeout((x: any) => {
+      this.getEmailcount();
+    }, 900000);
   }
 
   public intialLoad() {
@@ -229,7 +250,6 @@ export class DetailsComponent implements OnInit {
   stackedBarchart1() {
     const monthWisecart: any = {};
     this.userService.getMonthWiseOrderCancel().subscribe((response: any) => {
-      console.log(response)
       monthWisecart['month'] = response.response.map((y: any) => y.month);
       monthWisecart['cancelorders'] = response.response.map((y: any) => y.cancelorders);
       monthWisecart['ordercanceledavg'] = response.response.map((y: any) => y.ordercanceledavg);
