@@ -14,30 +14,24 @@ Chart.register(...registerables);
 export class DetailsComponent implements OnInit {
   data = [];
   routerName: string = '';
-  public kpiCards = [
+  public kpiCards: any[] = [];
+  public list = [
     {
       name: "Emails Received",
-      count: 100,
-      // background: '#c6c7f8',
-      background: '#ffffff'
+      count: 'N/A',
+
     },
     {
       name: "Emails After ETL",
-      count: 55,
-      //background: '#baedbd'
-      background: '#ffffff'
+      count: 'N/A',
     },
     {
       name: 'Emails Customer Branch',
-      count: 76,
-      //background: '#b5bffd'
-      background: '#ffffff'
+      count: 'N/A',
     },
     {
       name: 'Emails AM Branch',
-      count: 24,
-      //background: '#b5bffd'
-      background: '#ffffff'
+      count: 'N/A',
     }
   ];
 
@@ -49,6 +43,7 @@ export class DetailsComponent implements OnInit {
     this.routerName = route[route.length - 1];
     if (route[route.length - 1] === 'amanada_details') {
       setTimeout((x: any) => {
+        this.getEmailcount();
         this.bulidChart();
         this.bulidLinechart();
         this.stackedBarchart();
@@ -62,6 +57,16 @@ export class DetailsComponent implements OnInit {
 
     }
 
+  }
+
+  public getEmailcount() {
+    this.userService.getEmailcounters().subscribe((res: any) => {
+      if (res['response'].length != 0) {
+        this.kpiCards = res['response'];
+      } else {
+        this.kpiCards = this.list;
+      }
+    });
   }
 
   public intialLoad() {

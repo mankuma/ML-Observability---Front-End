@@ -19,7 +19,7 @@
 
     <div class="row ms-0 me-0 mt-1 mb-1" *ngIf="routerName === 'amanada_details'">
         <div *ngFor="let x of kpiCards; let i = index;" class="col-lg-3">
-            <div class="bx-shadow-black" [ngStyle]="{'background': x.background}">
+            <div class="bx-shadow-black" [ngStyle]="{'background': '#ffffff'}">
                 <p class="text-left fw-bolder fs-18 pt-2 px-2 clr-boston-red mb-0">{{x.name}}</p>
                 <p class="text-left fw-normal fs-24 p-2 clr-yellow">{{x.count}}</p>
             </div>

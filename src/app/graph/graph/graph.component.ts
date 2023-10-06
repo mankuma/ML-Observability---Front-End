@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ToolbarPosition, VizCreateOptions } from 'ngx-tableau';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-graph',
@@ -7,6 +8,7 @@ import { ToolbarPosition, VizCreateOptions } from 'ngx-tableau';
   styleUrls: ['./graph.component.scss']
 })
 export class GraphComponent {
+  constructor(private userService: UserService) { }
   options: VizCreateOptions = {
     hideTabs: true,
     hideToolbar: false,

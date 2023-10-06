@@ -71,4 +71,17 @@ export class UserService {
     const api = 'http://edswebdvvhil02:8083';
     return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderCancel', { headers: new HttpHeaders(this.headersval) });
   }
+
+  /*getEmailCounters*/
+  public getEmailcounters() {
+    const api = 'http://edswebdvvhil02:8083';
+    return this.http.get(api + '/' + 'v1/api/amanda/getEmailCounters', { headers: new HttpHeaders(this.headersval) });
+  }
+
+  // public getTrustedAuth() {
+  //   let data = {
+
+  //   }
+  //   return this.http.get('http://127.0.0.1:8000/arc/trustedauth/getticket'+ 'username'=cdvuser&trustedusername=ticketgranter&trustedpassword=trustedpass);
+  // }
 }
