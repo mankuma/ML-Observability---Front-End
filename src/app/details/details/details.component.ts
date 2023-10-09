@@ -87,7 +87,7 @@ export class DetailsComponent implements OnInit {
   public callApiMethod() {
     setTimeout((x: any) => {
       this.getEmailcount();
-    }, 900000);
+    }, 60000);
   }
 
   public intialLoad() {
@@ -147,7 +147,7 @@ export class DetailsComponent implements OnInit {
               backgroundColor: "#3e95cd",
               data: monthWisecart['totalcart']
             }, {
-              label: "Generated Carts Average",
+              label: "Average Cart Value",
               backgroundColor: "#8e5ea2",
               data: monthWisecart['totalavg']
             }
@@ -190,7 +190,7 @@ export class DetailsComponent implements OnInit {
               backgroundColor: "#3e95cd",
               data: monthWisecart['ordercoverted']
             }, {
-              label: "Converted Carts Average",
+              label: "Average Cart Value",
               backgroundColor: "#8e5ea2",
               data: monthWisecart['orderconvertedavg']
             }
@@ -228,7 +228,7 @@ export class DetailsComponent implements OnInit {
               backgroundColor: "#3e95cd",
               data: monthWisecart['ordernotcoverted']
             }, {
-              label: "Non Converted Carts Average",
+              label: "Average Cart Value",
               backgroundColor: "#8e5ea2",
               data: monthWisecart['ordernotconvertedavg']
             }
@@ -266,7 +266,7 @@ export class DetailsComponent implements OnInit {
               backgroundColor: "#3e95cd",
               data: monthWisecart['cancelorders']
             }, {
-              label: "Canceled Carts Average",
+              label: "Average Cart Value",
               backgroundColor: "#8e5ea2",
               data: monthWisecart['order canceled avg']
             }
