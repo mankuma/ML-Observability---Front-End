@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
     {
       name: "Models Live",
       para: 'Seen in last 24 hours',
-      count: 0,
+      count: 1,
       // background: '#c6c7f8',
       background: '#ffffff'
     },
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     {
       name: 'Model Versions Live',
       para: 'Seen in last 24 hours',
-      count: 1,
+      count: 2,
       //background: '#b5bffd'
       background: '#ffffff'
     }
