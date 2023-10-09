@@ -19,7 +19,7 @@ export class DetailsComponent implements OnInit {
     {
       name: "Emails Received",
       count: 'N/A',
-      key: "email_received"
+      key: "emails_received"
 
     },
     {
@@ -30,12 +30,12 @@ export class DetailsComponent implements OnInit {
     {
       name: 'Emails Customer Branch',
       count: 'N/A',
-      key: "email_customer_branch"
+      key: "emails_customer_branch"
     },
     {
       name: 'Emails AM Branch',
       count: 'N/A',
-      key: "email_AM_branch"
+      key: "emails_am_branch"
     }
   ];
 
