@@ -1,75 +1,117 @@
-<div class="row ms-0 me-0 mt-3">
-    <div *ngFor="let x of kpiCards; let i = index;" class="col-lg-4">
-        <div class="bx-shadow-black" [ngStyle]="{'background': x.background}">
-            <p class="text-left fw-bolder fs-18 pt-2 px-2 clr-boston-red mb-0">{{x.name}}</p>
-            <p class="text-left fw-normal fs-12 pb-1 px-2 text-dark mb-0">{{x.para}}</p>
-            <p class="text-left fw-normal fs-24 p-2 clr-yellow">{{x.count}}</p>
+<div class="main-table">
+
+
+    <div class="row ms-0 me-0 mt-3 px-2">
+        <div class="col-lg-12 py-3 px-2 fs-18 d-flex align-items-center text-dark fw-bolder bg-white bx-shadow-black cr-pointer"
+            (click)="openActive()">
+            Active Workloads
         </div>
     </div>
-</div>
 
-<div class="row ms-0 me-0 mt-3 px-2">
-    <div class="col-lg-12 py-3 px-2 fs-18 d-flex align-items-center clr-boston-red fw-bolder bg-white bx-shadow-black">
-        Models
+    <div class="row ms-0 me-0 mt-3" *ngIf="activeProjects === true">
+        <div *ngFor="let x of kpiCards; let i = index;" class="col-lg-3">
+            <div class="bx-shadow-black" [ngStyle]="{'background': x.background}">
+                <p class="text-left fw-bolder fs-18 pt-2 px-2 clr-boston-red mb-0">{{x.name}}</p>
+                <p class="text-left fw-normal fs-24 p-2 clr-yellow">{{x.count}}</p>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="filter-height mx-3 mt-3">
-    <table class="bg-tableheader mainTable">
-        <thead>
-            <tr>
-                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0">
-                    S.NO
-                </th>
-                <th Class="w-25 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0 border-start-0">
-                    Project Name
-                </th>
-                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0 border-strat-0">
-                    Cores
-                </th>
+    <div class="row ms-0 me-0 mt-3 px-2">
+        <div class="col-lg-12 py-3 px-2 fs-18 d-flex align-items-center text-dark fw-bolder bg-white bx-shadow-black cr-pointer"
+            (click)="openUtilization()">
+            Resources Utilization
+        </div>
+    </div>
 
-                <th Class="w-15 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
-                    No Of Models
-                </th>
-                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
-                    Memory
-                </th>
-                <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
-                    Status
-                </th>
+    <div class="row ms-0 me-0 mt-3" *ngIf="userUtilization === true">
+        <div *ngFor="let x of kpiUtlization; let i = index;" class="col-lg-4">
+            <div class="bx-shadow-black" [ngStyle]="{'background': x.background}">
+                <p class="text-left fw-bolder fs-18 pt-2 px-2 clr-boston-red mb-0">{{x.name}}</p>
+                <p class="text-left fw-normal fs-24 p-2 clr-yellow">{{x.count}}</p>
+            </div>
+        </div>
+    </div>
 
-                <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
-                    Last 30 days volume
-                </th>
-            </tr>
-        </thead>
-        <tbody class="bg-white tBody">
-            <tr *ngFor="let name of list; let i = index">
-                <td class="w-10 p-2 fs-14 border border-dark border-top-0 clr-boston-red ff-p-sb pt-1">
-                    {{i+1}}
-                </td>
-                <td (click)="navigateTodetails(name.url)" style="cursor: pointer;"
-                    class="w-25 p-2 fs-14 border border-dark border-top-0  border-start-0 clr-boston-red ff-p-sb pt-1">
-                    {{name.name}}
-                </td>
-                <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 clr-boston-red ff-p-sb pt-1">
-                    {{name.issues}}
-                </td>
-                <td class="w-15 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
-                    {{name.quality}}
-                </td>
-                <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
-                    {{name.drift}}
-                </td>
-                <td class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 ff-p-sb pt-1">
-                    {{name.performance}}
-                </td>
+    <div class="row ms-0 me-0 mt-3 px-2">
+        <div
+            class="col-lg-12 py-3 px-2 fs-18 d-flex align-items-center clr-boston-red fw-bolder bg-white bx-shadow-black">
+            Projects
+        </div>
+    </div>
 
-
-                <td class="w-20 p-2 fs-14 border border-dark border-top-0 clr-yellow ff-p-sb pt-1">
-                    {{name.volume}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="filter-height mx-3 mt-3">
+        <table class="bg-tableheader mainTable">
+            <thead>
+                <tr>
+                    <th Class="w-5 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0">
+                        Project Id
+                    </th>
+                    <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0 border-start-0">
+                        Project Name
+                    </th>
+                    <th Class="w-15 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0 border-strat-0">
+                        Project Created By
+                    </th>
+                    <th Class="w-5 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0 border-strat-0">
+                        Sessions
+                    </th>
+                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                        No Of Models
+                    </th>
+                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                        Memory
+                    </th>
+                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                        Status
+                    </th>
+                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                        Last 30 days volume
+                    </th>
+                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                        Last Updated On
+                    </th>
+                    <th Class="w-5 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white tBody">
+                <tr *ngFor="let name of list; let i = index">
+                    <td class="w-5 p-2 fs-14 border border-dark border-top-0 clr-boston-red ff-p-sb pt-1">
+                        {{i+1}}
+                    </td>
+                    <td (click)="navigateTodetails(name.url)" style="cursor: pointer;"
+                        class="w-20 p-2 fs-14 border border-dark border-top-0  border-start-0 clr-boston-red ff-p-sb pt-1">
+                        {{name.name}}
+                    </td>
+                    <td class="w-15 p-2 fs-14 border border-dark border-top-0 border-start-0 text-dark ff-p-sb pt-1">
+                        {{name.createdBy}}
+                    </td>
+                    <td
+                        class="w-5 p-2 fs-14 border border-dark border-top-0 border-start-0 clr-boston-red ff-p-sb pt-1">
+                        {{name.issues}}
+                    </td>
+                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
+                        {{name.quality}}
+                    </td>
+                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
+                        {{name.drift}}
+                    </td>
+                    <td class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 ff-p-sb pt-1">
+                        {{name.performance}}
+                    </td>
+                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 clr-yellow ff-p-sb pt-1">
+                        {{name.volume}}
+                    </td>
+                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 text-black ff-p-sb pt-1">
+                        {{name.updatedOn}}
+                    </td>
+                    <td class="w-5 p-2 fs-14 border border-dark border-top-0 text-primary ff-p-sb pt-1 cr-pointer">
+                        Expand
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

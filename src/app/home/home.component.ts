@@ -5,32 +5,52 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
 
+  userUtilization: boolean = true;
+  activeProjects: boolean = true;
+
+  public kpiUtlization = [
+    {
+      name: "CPU",
+      count: '50%',
+      background: '#ffffff'
+    },
+    {
+      name: "Memory",
+      count: '88%',
+      background: '#ffffff'
+    },
+    {
+      name: "No Of Projects",
+      count: '3',
+      background: '#ffffff'
+    }]
+
   public kpiCards = [
     {
-      name: "Models Live",
-      para: 'Seen in last 24 hours',
-      count: 1,
-      // background: '#c6c7f8',
-      background: '#ffffff'
-    },
-    {
-      name: "Prediction Volume",
-      para: 'Seen in last 24 hours',
-      count: '17,641',
-      //background: '#baedbd'
-      background: '#ffffff'
-    },
-    {
-      name: 'Model Versions Live',
-      para: 'Seen in last 24 hours',
+      name: 'Projects',
       count: 2,
-      //background: '#b5bffd'
       background: '#ffffff'
-    }
+    },
+    {
+      name: "Models",
+      count: 4,
+      background: '#ffffff'
+    },
+    {
+      name: "Experiments",
+      count: 3,
+      background: '#ffffff'
+    },
+    {
+      name: "Jobs",
+      count: 3,
+      background: '#ffffff'
+    },
+
   ];
 
   public list = [{
@@ -40,7 +60,9 @@ export class HomeComponent implements OnInit {
     drift: '32 GB',
     quality: 5,
     volume: '15,00,000',
-    url: '/details/amanada_details'
+    url: '/details/amanada_details',
+    createdBy: 'Williams',
+    updatedOn: '09/09/2013'
   },
   {
     name: 'PROPENSITY',
@@ -49,7 +71,9 @@ export class HomeComponent implements OnInit {
     drift: '8 GB',
     quality: 8,
     volume: '75,00,000',
-    url: '/details/propensity_details'
+    url: '/details/propensity_details',
+    createdBy: 'Tom',
+    updatedOn: '10/07/2019'
   },
   {
     name: 'SUPPLY AND DEMAND',
@@ -58,7 +82,9 @@ export class HomeComponent implements OnInit {
     drift: '16 GB',
     quality: 4,
     volume: '7,00,000',
-    url: '/details/supplydemand_details'
+    url: '/details/supplydemand_details',
+    createdBy: 'Dav',
+    updatedOn: '10/08/2023'
   }];
 
   constructor(private userService: UserService, private router: Router) {
@@ -76,6 +102,14 @@ export class HomeComponent implements OnInit {
 
   navigateTodetails(name: string) {
     this.router.navigate([name]);
+  }
+
+  public openUtilization() {
+    this.userUtilization = this.userUtilization === true ? false : true;
+  }
+
+  public openActive() {
+    this.activeProjects = this.activeProjects === true ? false : true;
   }
 
 }

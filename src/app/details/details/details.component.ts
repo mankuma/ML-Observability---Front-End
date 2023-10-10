@@ -18,23 +18,23 @@ export class DetailsComponent implements OnInit {
   public list = [
     {
       name: "Emails Received",
-      count: 'N/A',
+      count: 0,
       key: "emails_received"
 
     },
     {
       name: "Emails After ETL",
-      count: 'N/A',
+      count: 0,
       key: "email_after_etl"
     },
     {
       name: 'Emails Customer Branch',
-      count: 'N/A',
+      count: 0,
       key: "emails_customer_branch"
     },
     {
       name: 'Emails AM Branch',
-      count: 'N/A',
+      count: 0,
       key: "emails_am_branch"
     }
   ];
@@ -71,7 +71,7 @@ export class DetailsComponent implements OnInit {
         data.map((x: any) => {
           res['response'].map((y: any) => {
             if (x.key.toLowerCase() === y.name.toLowerCase()) {
-              x.count = y.count === null ? 'N/A' : y.count;
+              x.count = y.count === null ? 0 : y.count;
             }
           });
           this.kpiCards.push(x);
@@ -134,9 +134,9 @@ export class DetailsComponent implements OnInit {
       monthWisecart['month'] = x.response.map((y: any) => y.month);
       monthWisecart['totalcart'] = x.response.map((y: any) => y.totalcart);
       monthWisecart['totalavg'] = x.response.map((y: any) => y.totalavg);
-      monthWisecart['totalcart'].pop();
-      monthWisecart['month'].pop();
-      monthWisecart['totalavg'].pop();
+      // monthWisecart['totalcart'].pop();
+      // monthWisecart['month'].pop();
+      // monthWisecart['totalavg'].pop();
       var barChart = new Chart('bar1', {
         type: 'bar',
         data: {
@@ -177,9 +177,9 @@ export class DetailsComponent implements OnInit {
       monthWisecart['month'] = x.response.map((y: any) => y.month);
       monthWisecart['ordercoverted'] = x.response.map((y: any) => y.ordercoverted);
       monthWisecart['orderconvertedavg'] = x.response.map((y: any) => y.orderconvertedavg);
-      monthWisecart['ordercoverted'].pop();
-      monthWisecart['month'].pop();
-      monthWisecart['orderconvertedavg'].pop();
+      // monthWisecart['ordercoverted'].pop();
+      // monthWisecart['month'].pop();
+      // monthWisecart['orderconvertedavg'].pop();
       var barChart = new Chart('myChart3', {
         type: 'bar',
         data: {
@@ -215,9 +215,9 @@ export class DetailsComponent implements OnInit {
       monthWisecart['month'] = response.response.map((y: any) => y.month);
       monthWisecart['ordernotcoverted'] = response.response.map((y: any) => y.ordernotcoverted);
       monthWisecart['ordernotconvertedavg'] = response.response.map((y: any) => y.ordernotconvertedavg);
-      monthWisecart['ordernotcoverted'].pop();
-      monthWisecart['month'].pop();
-      monthWisecart['ordernotconvertedavg'].pop();
+      // monthWisecart['ordernotcoverted'].pop();
+      // monthWisecart['month'].pop();
+      // monthWisecart['ordernotconvertedavg'].pop();
       var barChart = new Chart('ctx', {
         type: 'bar',
         data: {
@@ -253,9 +253,9 @@ export class DetailsComponent implements OnInit {
       monthWisecart['month'] = response.response.map((y: any) => y.month);
       monthWisecart['cancelorders'] = response.response.map((y: any) => y.cancelorders);
       monthWisecart['ordercanceledavg'] = response.response.map((y: any) => y.ordercanceledavg);
-      monthWisecart['cancelorders'].pop();
-      monthWisecart['month'].pop();
-      monthWisecart['ordercanceledavg'].pop();
+      // monthWisecart['cancelorders'].pop();
+      // monthWisecart['month'].pop();
+      // monthWisecart['ordercanceledavg'].pop();
       var barChart = new Chart('ctx1', {
         type: 'bar',
         data: {

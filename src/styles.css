@@ -14,14 +14,13 @@ body {
     background-color: #ffffff !important;
 }
 
-   .fs-14 {
+.fs-14 {
     font-size: 14px;
-   }
+}
 
-   
 
-.bg-white 
-{
+
+.bg-white {
     background-color: #fff;
 }
 
@@ -31,11 +30,11 @@ body {
 
 .fs-18 {
     font-size: 18px;
-   }
+}
 
-   .fs-24 {
+.fs-24 {
     font-size: 24px;
-   }
+}
 
 .clr-boston-red {
     color: #cc0000;
@@ -79,7 +78,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     height: calc(100vh - 13rem);
-   
+
 }
 
 .filter-height .mainTable {
@@ -95,7 +94,7 @@ body {
     position: sticky;
     top: 0 !important;
     z-index: 1 !important;
-   
+
 
 }
 
@@ -111,6 +110,23 @@ body {
     width: 10%;
 }
 
+.w-5 {
+    width: 5%;
+}
+
 .w-15 {
     width: 15%;
+}
+
+.w-20 {
+    width: 20%;
+}
+
+.cr-pointer {
+    cursor: pointer;
+}
+
+.main-table {
+    height: calc(100vh - 5rem);
+    overflow-y: auto;
 }
