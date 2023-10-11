@@ -25,7 +25,7 @@
     </div>
 
     <div class="row ms-0 me-0 mt-3" *ngIf="userUtilization === true">
-        <div *ngFor="let x of kpiUtlization; let i = index;" class="col-lg-4">
+        <div *ngFor="let x of kpiUtlization; let i = index;" class="col-lg-6">
             <div class="bx-shadow-black" [ngStyle]="{'background': x.background}">
                 <p class="text-left fw-bolder fs-18 pt-2 px-2 clr-boston-red mb-0">{{x.name}}</p>
                 <p class="text-left fw-normal fs-24 p-2 clr-yellow">{{x.count}}</p>
@@ -44,24 +44,20 @@
         <table class="bg-tableheader mainTable">
             <thead>
                 <tr>
-                    <th Class="w-5 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0">
-                        Project Id
+                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0">
+                        Id
                     </th>
                     <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0 border-start-0">
-                        Project Name
+                        Name
                     </th>
-                    <th Class="w-15 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0 border-strat-0">
-                        Project Created By
+                    <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0 border-strat-0">
+                        Created By
                     </th>
-                    <th Class="w-5 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0 border-strat-0">
-                        Sessions
-                    </th>
+
                     <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
                         No Of Models
                     </th>
-                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
-                        Memory
-                    </th>
+
                     <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
                         Status
                     </th>
@@ -71,33 +67,29 @@
                     <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
                         Last Updated On
                     </th>
-                    <th Class="w-5 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
                         Action
                     </th>
                 </tr>
             </thead>
-            <tbody class="bg-white tBody">
-                <tr *ngFor="let name of list; let i = index">
-                    <td class="w-5 p-2 fs-14 border border-dark border-top-0 clr-boston-red ff-p-sb pt-1">
+            <tbody class="bg-white tBody" *ngFor="let name of list; let i = index">
+
+                <tr>
+                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 clr-boston-red ff-p-sb pt-1">
                         {{i+1}}
                     </td>
                     <td (click)="navigateTodetails(name.url)" style="cursor: pointer;"
                         class="w-20 p-2 fs-14 border border-dark border-top-0  border-start-0 clr-boston-red ff-p-sb pt-1">
                         {{name.name}}
                     </td>
-                    <td class="w-15 p-2 fs-14 border border-dark border-top-0 border-start-0 text-dark ff-p-sb pt-1">
+                    <td class="w-20 p-2 fs-14 border border-dark border-top-0 border-start-0 text-dark ff-p-sb pt-1">
                         {{name.createdBy}}
                     </td>
-                    <td
-                        class="w-5 p-2 fs-14 border border-dark border-top-0 border-start-0 clr-boston-red ff-p-sb pt-1">
-                        {{name.issues}}
-                    </td>
+
                     <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
                         {{name.quality}}
                     </td>
-                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
-                        {{name.drift}}
-                    </td>
+
                     <td class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 ff-p-sb pt-1">
                         {{name.performance}}
                     </td>
@@ -107,11 +99,32 @@
                     <td class="w-10 p-2 fs-14 border border-dark border-top-0 text-black ff-p-sb pt-1">
                         {{name.updatedOn}}
                     </td>
-                    <td class="w-5 p-2 fs-14 border border-dark border-top-0 text-primary ff-p-sb pt-1 cr-pointer">
-                        Expand
+                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 text-primary ff-p-sb pt-1 cr-pointer">
+                        <span (click)="expandAcc(i)">Expand</span>
                     </td>
                 </tr>
+                <tr *ngIf="selectedRow === i">
+                    <td colspan="9" class="border border-dark">
+                        <div class="w-100 d-flex align-items-center justify-content-between">
+                            <p class="mb-0 p-2">
+                                <span class="fs-12 font-weight-bolder text-dark">Name:</span>
+                                <span class="fs-14 font-weight-normal text-dark">{{name.name}}</span>
+                            </p>
+                            <p class="mb-0 p-2">
+                                <span class="fs-12 font-weight-bolder text-dark">Status:</span>
+                                <span class="fs-14 font-weight-normal text-dark">{{name.performance}}</span>
+                            </p>
+                            <p class="mb-0 p-2">
+                                <span class="fs-12 font-weight-bolder text-dark">Last 30 days volume:</span>
+                                <span class="fs-14 font-weight-normal text-dark">{{name.volume}}</span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+
+
             </tbody>
+
         </table>
     </div>
 </div>

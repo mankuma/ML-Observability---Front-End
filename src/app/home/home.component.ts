@@ -22,17 +22,12 @@ export class HomeComponent implements OnInit {
       name: "Memory",
       count: '88%',
       background: '#ffffff'
-    },
-    {
-      name: "No Of Projects",
-      count: '3',
-      background: '#ffffff'
     }]
 
   public kpiCards = [
     {
       name: 'Projects',
-      count: 2,
+      count: 3,
       background: '#ffffff'
     },
     {
@@ -56,7 +51,7 @@ export class HomeComponent implements OnInit {
   public list = [{
     name: 'AMANADA',
     issues: 1,
-    performance: 'Inprogress',
+    performance: 'In progress',
     drift: '32 GB',
     quality: 5,
     volume: '15,00,000',
@@ -78,7 +73,7 @@ export class HomeComponent implements OnInit {
   {
     name: 'SUPPLY AND DEMAND',
     issues: 8,
-    performance: 'Inprogress',
+    performance: 'In progress',
     drift: '16 GB',
     quality: 4,
     volume: '7,00,000',
@@ -86,6 +81,8 @@ export class HomeComponent implements OnInit {
     createdBy: 'Dav',
     updatedOn: '10/08/2023'
   }];
+
+  public selectedRow: number = -1;
 
   constructor(private userService: UserService, private router: Router) {
 
@@ -110,6 +107,11 @@ export class HomeComponent implements OnInit {
 
   public openActive() {
     this.activeProjects = this.activeProjects === true ? false : true;
+  }
+
+  public expandAcc(num: number) {
+    console.log(num);
+    this.selectedRow = num;
   }
 
 }
