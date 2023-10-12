@@ -67,7 +67,6 @@
         </div> -->
     </div>
 
-
     <div class="row ms-0 me-0 mt-5 px-2">
         <div
             class="col-lg-12 py-3 px-2 fs-18 d-flex align-items-center clr-boston-red fw-bolder bg-white bx-shadow-black">
@@ -126,5 +125,64 @@
                 </tr>
             </tbody>
         </table>
+
+        <p class="chat-icon mt-5 cr-pointer" (click)="openPopup()">
+            <img style="height: 30px ; width: 40px;" src="assets/chat_icon.png" alt="loading-gif">
+        </p>
+        <div class="modal modal-chatbot" id="chatbot" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}"
+            style="height:80vh">
+            <div class="modal-dialog" role="document1">
+                <div class="modal-content widt ">
+                    <div class="modal-header  b-1px heig d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="mt-2">AVA</span>
+                        </div>
+                        <div>
+                            <a type="button" (click)="minimize()" class="minm">-</a>
+                            <button type="button" class="close " (click)="closePopup()">x
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body scroll" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                        <div>
+                            <p class="fc-black text-right answer-bg p-2 Answer-align-right mb-3">Hello,how can I help
+                                you!
+                            </p>
+                        </div>
+                        <div *ngIf="chatMessages.length!=0">
+                            <div *ngFor="let message of chatMessages ">
+                                <div class="width-80 question-bg question-align-left mb-3">
+                                    <p class="text-left fc-black width-100 d-flex align-items-center mb-0 py-2 px-2">
+                                        {{message.question}}</p>
+                                </div>
+                                <div class="width-80 Answer-align-right mb-3">
+                                    <div class="answer-bg">
+                                        <p id={{message.id}}
+                                            class="text-left  fc-black width-100  flex-column align-items-center mb-0 py-2 px-2"
+                                            *ngIf="message.hasOwnProperty('answer')===true && message.answer!=''"
+                                            [innerHtml]="message.answer"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="loader" style="display: flex; justify-content: end;">
+                        <img class="loading-icon" src="assets/loading.gif" alt="loading-gif">
+                    </div>
+                    <div class="d-flex ml-2 mb-4">
+                        <form class="w-70 d-flex flex-column justify-content-center align-items-center"
+                            (keydown)="keyDownFunction($event)">
+                            <p #chatContainer></p>
+                            <input type="text" #lname name="lname" class="wi" id="lname">
+                        </form>
+                        <img [ngClass]="{'cr-pointer':lname.value!='' && actionRequired===true}" class="pl-2"
+                            src="assets/send-green.png"
+                            (click)="lname.value!='' && actionRequired===true? updateMessage(lname.value):'' ">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 </div>

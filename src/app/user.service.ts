@@ -79,6 +79,12 @@ export class UserService {
     return this.http.get(api + '/' + 'v1/api/amanda/getEmailCounters', { headers: new HttpHeaders(this.headersval) });
   }
 
+
+  /*Chatbot*/
+  public getchatbot(reply: string) {
+    const api = 'http://hdfnifidevvh1:9097/file?filename';
+    return this.http.get(api + '=' + reply);
+  }
   // public getTrustedAuth() {
   //   let data = {
 
