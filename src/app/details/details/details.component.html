@@ -13,8 +13,6 @@
                 <canvas class="bar w-100" id="myChart1"></canvas>
             </div>
         </div>
-
-
     </div>
 
     <div class="row ms-0 me-0 mt-1 mb-1" *ngIf="routerName === 'amanada_details'">
@@ -32,14 +30,24 @@
         </div>
     </div>
 
+    <div class="row ms-0 me-0 mt-1 mb-1 bg-white bx-shadow-black py-2 px-1" *ngIf="routerName === 'amanada_details'">
+        <div class="col-lg-12">
+            <span class="cr-pointer py-2 px-4 fs-14" (click)="tabChange('mtd')" [ngClass]="{'bg-red': selectedTab === 'mtd', 
+                'text-white': selectedTab === 'mtd', 'text-dark': selectedTab !== 'mtd'}">
+                Month</span>
+            <span class="cr-pointer py-2 px-3 fs-14" (click)="tabChange('ytd')" [ngClass]="{'bg-red': selectedTab === 'ytd', 'text-white': selectedTab === 'ytd', 
+                'text-dark': selectedTab !== 'ytd'}">
+                Year</span>
+        </div>
+    </div>
+
     <div class="row ms-0 me-0 mt-1" *ngIf="routerName === 'amanada_details'">
-        <div class="col-lg-6 mt-1 mb-1 ">
+        <div class="col-lg-6 mt-1 mb-1" *ngFor="let data of viewData; let i = index;">
             <div class="widget bx-show-black border border-dark">
-                <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Generated Carts</p>
-                <canvas class="bar w-100" id="bar1"></canvas>
+                <app-bar-chart [id]="selectedTab +''+ i" [values]="data"></app-bar-chart>
             </div>
         </div>
-        <div class="col-lg-6 mt-1 mb-1">
+        <!-- <div class="col-lg-6 mt-1 mb-1">
             <div class="widget bx-show-black border border-dark">
                 <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Converted Carts</p>
                 <canvas class="bar w-100" id="myChart3"></canvas>
@@ -56,7 +64,7 @@
                 <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Canceled Carts</p>
                 <canvas class="bar w-100" id="ctx1"></canvas>
             </div>
-        </div>
+        </div> -->
     </div>
 
 

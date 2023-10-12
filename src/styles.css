@@ -130,3 +130,7 @@ body {
     height: calc(100vh - 5rem);
     overflow-y: auto;
 }
+
+.expand:hover {
+    text-decoration: underline;
+}

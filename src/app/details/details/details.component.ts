@@ -15,6 +15,7 @@ export class DetailsComponent implements OnInit {
   data = [];
   routerName: string = '';
   public kpiCards: any[] = [];
+  public selectedTab: string = '';
   public list = [
     {
       name: "Emails Received",
@@ -39,28 +40,16 @@ export class DetailsComponent implements OnInit {
     }
   ];
 
+  viewData: any[] = [];
+
   constructor(private userService: UserService, private router: Router) {
 
   }
   ngOnInit(): void {
     let route = this.router.url.split('/');
     this.routerName = route[route.length - 1];
-    if (route[route.length - 1] === 'amanada_details') {
-      setTimeout((x: any) => {
-        this.getEmailcount();
-        this.bulidChart();
-        this.bulidLinechart();
-        this.stackedBarchart();
-        this.stackedBarchart1();
-
-      })
-    } else {
-      setTimeout((x: any) => {
-        this.intialLoad();
-      })
-
-    }
-
+    this.getEmailcount();
+    this.tabChange('mtd');
   }
 
   public getEmailcount() {
@@ -128,161 +117,74 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  bulidChart() {
+  generatedCarts() {
     const monthWisecart: any = {};
-    this.userService.monthwiseCart().subscribe((x: any) => {
-      monthWisecart['month'] = x.response.map((y: any) => y.month);
+    this.userService.monthwiseCart(this.selectedTab).subscribe((x: any) => {
+      monthWisecart['xlabels'] = x.response.map((y: any) => this.selectedTab === 'mtd' ? y.cartdate.split('T')[0] : y.month);
       monthWisecart['totalcart'] = x.response.map((y: any) => y.totalcart);
       monthWisecart['totalavg'] = x.response.map((y: any) => y.totalavg);
-      // monthWisecart['totalcart'].pop();
-      // monthWisecart['month'].pop();
-      // monthWisecart['totalavg'].pop();
-      var barChart = new Chart('bar1', {
-        type: 'bar',
-        data: {
-          labels: monthWisecart['month'],
-          datasets: [
-            {
-              label: "Generated Carts",
-              backgroundColor: "#3e95cd",
-              data: monthWisecart['totalcart']
-            }, {
-              label: "Average Cart Value",
-              backgroundColor: "#8e5ea2",
-              data: monthWisecart['totalavg']
-            }
-          ]
-        },
-        options: {
-          scales: {
-            y: {
-              suggestedMin: 1000,
-              suggestedMax: 500000
-            }
-          }
-        }
-      });
+      monthWisecart['label1'] = "Generated Carts";
+      monthWisecart['label2'] = "Average Cart Value";
+      monthWisecart['heading'] = 'Generated Carts';
+      this.viewData.push(monthWisecart);
+      this.convertedCarts();
     });
-
 
   };
-
-
-
-
-
-  bulidLinechart() {
+  convertedCarts() {
     const monthWisecart: any = {};
-    this.userService.getMonthWiseOrderConverted().subscribe((x: any) => {
-      monthWisecart['month'] = x.response.map((y: any) => y.month);
-      monthWisecart['ordercoverted'] = x.response.map((y: any) => y.ordercoverted);
-      monthWisecart['orderconvertedavg'] = x.response.map((y: any) => y.orderconvertedavg);
-      // monthWisecart['ordercoverted'].pop();
-      // monthWisecart['month'].pop();
-      // monthWisecart['orderconvertedavg'].pop();
-      var barChart = new Chart('myChart3', {
-        type: 'bar',
-        data: {
-          labels: monthWisecart['month'],
-          datasets: [
-            {
-              label: "Converted Carts",
-              backgroundColor: "#3e95cd",
-              data: monthWisecart['ordercoverted']
-            }, {
-              label: "Average Cart Value",
-              backgroundColor: "#8e5ea2",
-              data: monthWisecart['orderconvertedavg']
-            }
-          ]
-        },
-        options: {
-          scales: {
-            y: {
-              suggestedMin: 1000,
-              suggestedMax: 500000
-            }
-          }
-        }
-      });
+    this.userService.getMonthWiseOrderConverted(this.selectedTab).subscribe((x: any) => {
+      monthWisecart['xlabels'] = x.response.map((y: any) => this.selectedTab === 'mtd' ? y.cartdate.split('T')[0] : y.month);
+      monthWisecart['totalcart'] = x.response.map((y: any) => y.totalcart);
+      monthWisecart['totalavg'] = x.response.map((y: any) => y.totalavg);
+      monthWisecart['label1'] = "Converted Carts";
+      monthWisecart['label2'] = "Average Cart Value";
+      monthWisecart['heading'] = 'Converted Carts';
+      this.viewData.push(monthWisecart);
+      this.notconvertedCarts();
     });
+
   }
-
-
-  stackedBarchart() {
+  notconvertedCarts() {
     const monthWisecart: any = {};
-    this.userService.getMonthWiseOrderNotConverted().subscribe((response: any) => {
-      monthWisecart['month'] = response.response.map((y: any) => y.month);
-      monthWisecart['ordernotcoverted'] = response.response.map((y: any) => y.ordernotcoverted);
-      monthWisecart['ordernotconvertedavg'] = response.response.map((y: any) => y.ordernotconvertedavg);
-      // monthWisecart['ordernotcoverted'].pop();
-      // monthWisecart['month'].pop();
-      // monthWisecart['ordernotconvertedavg'].pop();
-      var barChart = new Chart('ctx', {
-        type: 'bar',
-        data: {
-          labels: monthWisecart['month'],
-          datasets: [
-            {
-              label: "Non Converted Carts",
-              backgroundColor: "#3e95cd",
-              data: monthWisecart['ordernotcoverted']
-            }, {
-              label: "Average Cart Value",
-              backgroundColor: "#8e5ea2",
-              data: monthWisecart['ordernotconvertedavg']
-            }
-          ]
-        },
-        options: {
-          scales: {
-            y: {
-              suggestedMin: 1000,
-              suggestedMax: 500000
-            }
-          }
-        }
-      });
-    })
-  }
-
-
-  stackedBarchart1() {
-    const monthWisecart: any = {};
-    this.userService.getMonthWiseOrderCancel().subscribe((response: any) => {
-      monthWisecart['month'] = response.response.map((y: any) => y.month);
-      monthWisecart['cancelorders'] = response.response.map((y: any) => y.cancelorders);
-      monthWisecart['ordercanceledavg'] = response.response.map((y: any) => y.ordercanceledavg);
-      // monthWisecart['cancelorders'].pop();
-      // monthWisecart['month'].pop();
-      // monthWisecart['ordercanceledavg'].pop();
-      var barChart = new Chart('ctx1', {
-        type: 'bar',
-        data: {
-          labels: monthWisecart['month'],
-          datasets: [
-            {
-              label: "Canceled Carts",
-              backgroundColor: "#3e95cd",
-              data: monthWisecart['cancelorders']
-            }, {
-              label: "Average Cart Value",
-              backgroundColor: "#8e5ea2",
-              data: monthWisecart['order canceled avg']
-            }
-          ]
-        },
-        options: {
-          scales: {
-            y: {
-              suggestedMin: 1000,
-              suggestedMax: 500000
-            }
-          }
-        }
-      });
+    this.userService.getMonthWiseOrderNotConverted(this.selectedTab).subscribe((response: any) => {
+      monthWisecart['xlabels'] = response.response.map((y: any) => this.selectedTab === 'mtd' ? y.cartdate.split('T')[0] : y.month);
+      monthWisecart['totalcart'] = response.response.map((y: any) => y.totalcart);
+      monthWisecart['totalavg'] = response.response.map((y: any) => y.ordernotconvertedavg);
+      monthWisecart['label1'] = "Non Converted Carts";
+      monthWisecart['label2'] = "Average Cart Value";
+      monthWisecart['heading'] = 'Non Converted Carts';
+      this.viewData.push(monthWisecart);
+      this.cancelledCarts();
     })
 
+  }
+  cancelledCarts() {
+    const monthWisecart: any = {};
+    this.userService.getMonthWiseOrderCancel(this.selectedTab).subscribe((response: any) => {
+      monthWisecart['xlabels'] = response.response.map((y: any) => this.selectedTab === 'mtd' ? y.cartdate.split('T')[0] : y.month);
+      monthWisecart['totalcart'] = response.response.map((y: any) => y.totalcart);
+      monthWisecart['totalavg'] = response.response.map((y: any) => y.totalavg);
+      monthWisecart['label1'] = "Cancelled Carts";
+      monthWisecart['label2'] = "Average Cart Value";
+      monthWisecart['heading'] = 'Cancelled Carts';
+      this.viewData.push(monthWisecart);
+    })
+
+  }
+
+  public tabChange(tabName: string) {
+    this.selectedTab = tabName;
+    this.viewData = [];
+    let route = this.router.url.split('/');
+    if (route[route.length - 1] === 'amanada_details') {
+      this.generatedCarts();
+    } else {
+      setTimeout((x: any) => {
+        this.intialLoad();
+      })
+
+    }
   }
 
 

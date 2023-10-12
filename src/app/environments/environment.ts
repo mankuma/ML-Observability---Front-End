@@ -4,6 +4,7 @@
 
 export const environment = {
     production: true,
+    type: 'dev',
     testRole: true,
     authenticate: true,
     grant_type: "implicit",

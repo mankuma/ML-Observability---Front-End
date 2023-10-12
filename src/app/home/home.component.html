@@ -61,15 +61,13 @@
                     <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
                         Status
                     </th>
-                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                    <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
                         Last 30 days volume
                     </th>
                     <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
                         Last Updated On
                     </th>
-                    <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
-                        Action
-                    </th>
+
                 </tr>
             </thead>
             <tbody class="bg-white tBody" *ngFor="let name of list; let i = index">
@@ -86,22 +84,20 @@
                         {{name.createdBy}}
                     </td>
 
-                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
-                        {{name.quality}}
+                    <td (click)="expandAcc(i)"
+                        class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
+                        <span class="expand cr-pointer">{{name.quality}}</span>
                     </td>
-
                     <td class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 ff-p-sb pt-1">
                         {{name.performance}}
                     </td>
-                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 clr-yellow ff-p-sb pt-1">
+                    <td class="w-15 p-2 fs-14 border border-dark border-top-0 clr-yellow ff-p-sb pt-1">
                         {{name.volume}}
                     </td>
-                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 text-black ff-p-sb pt-1">
+                    <td class="w-15 p-2 fs-14 border border-dark border-top-0 text-black ff-p-sb pt-1">
                         {{name.updatedOn}}
                     </td>
-                    <td class="w-10 p-2 fs-14 border border-dark border-top-0 text-primary ff-p-sb pt-1 cr-pointer">
-                        <span (click)="expandAcc(i)">Expand</span>
-                    </td>
+
                 </tr>
                 <tr *ngIf="selectedRow === i">
                     <td colspan="9" class="border border-dark">

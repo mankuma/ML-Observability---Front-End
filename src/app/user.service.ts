@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from './environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -43,33 +44,33 @@ export class UserService {
     return this.http.get(api + '/' + 'v1/api/amanda/YTDreports', { headers: new HttpHeaders(this.headersval) });
   }
 
-  public monthwiseCart() {
+  public monthwiseCart(view: string) {
     const api = 'http://edswebdvvhil02:8083';
-    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseTotalCart', { headers: new HttpHeaders(this.headersval) });
+    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseTotalCart' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getMonthWiseOrderConverted*/
-  public getMonthWiseOrderConverted() {
+  public getMonthWiseOrderConverted(view: string) {
     const api = 'http://edswebdvvhil02:8083';
-    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderConverted', { headers: new HttpHeaders(this.headersval) });
+    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderConverted' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getMonthWiseTotalCart*/
-  public getMonthWiseTotalCart() {
+  public getMonthWiseTotalCart(view: string) {
     const api = 'http://edswebdvvhil02:8083';
-    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseTotalCart', { headers: new HttpHeaders(this.headersval) });
+    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseTotalCart' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getMonthWiseOrderNotConverted*/
-  public getMonthWiseOrderNotConverted() {
+  public getMonthWiseOrderNotConverted(view: string) {
     const api = 'http://edswebdvvhil02:8083';
-    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderNotConverted', { headers: new HttpHeaders(this.headersval) });
+    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderNotConverted' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getMonthWiseOrderCancel*/
-  public getMonthWiseOrderCancel() {
+  public getMonthWiseOrderCancel(view: string) {
     const api = 'http://edswebdvvhil02:8083';
-    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderCancel', { headers: new HttpHeaders(this.headersval) });
+    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderCancel' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getEmailCounters*/

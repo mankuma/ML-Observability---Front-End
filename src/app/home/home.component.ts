@@ -110,8 +110,12 @@ export class HomeComponent implements OnInit {
   }
 
   public expandAcc(num: number) {
-    console.log(num);
-    this.selectedRow = num;
+    if (this.selectedRow != num) {
+      this.selectedRow = num;
+    } else {
+      this.selectedRow = -1;
+    }
+
   }
 
 }

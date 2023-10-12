@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DetailsComponent } from './details/details.component';
 import { RouterModule, Routes } from '@angular/router';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 
 
@@ -11,7 +12,8 @@ export const Childroutes: Routes = [
 
 @NgModule({
   declarations: [
-    DetailsComponent
+    DetailsComponent,
+    BarChartComponent
   ],
   imports: [
     CommonModule,
