@@ -84,20 +84,21 @@
               ],
               "outputHashing": "all"
             }
-          },
-          "defaultConfiguration": "production"
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "UI:build"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "ds-project:build:production"
+              "browserTarget": "UI:build:production"
             },
-            "development": {
-              "browserTarget": "ds-project:build:development"
+            "dev": {
+              "browserTarget": "UI:build:dev"
             }
-          },
-          "defaultConfiguration": "development"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
