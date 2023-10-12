@@ -134,3 +134,11 @@ body {
 .expand:hover {
     text-decoration: underline;
 }
+
+.w-30px {
+    width: 30px;
+}
+
+.w-70 {
+    width: 70%;
+}

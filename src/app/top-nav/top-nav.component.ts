@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-top-nav',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class TopNavComponent {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   logout() {
     localStorage.clear();
@@ -17,6 +18,10 @@ export class TopNavComponent {
 
   public intialRoute() {
     this.router.navigate(['']);
+  }
+
+  public openpopup() {
+    this.userService.callChatopen();
   }
 
 }

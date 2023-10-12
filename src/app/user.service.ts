@@ -85,15 +85,16 @@ export class UserService {
     const api = 'http://hdfnifidevvh1:9097/file?filename';
     return this.http.get(api + '=' + reply);
   }
-  // public getTrustedAuth() {
-  //   let data = {
 
-  //   }
-  //   return this.http.get('http://127.0.0.1:8000/arc/trustedauth/getticket'+ 'username'=cdvuser&trustedusername=ticketgranter&trustedpassword=trustedpass);
-  // }
 
   public checkResponse() {
     let headers = { Authorization: 'apikey R6j3HUbEuP04AsTtsVJYycwP8GkyS569K5JHPKAjArGEiYqp' };
     return this.http.get('http://modelvisualizationtesting.cdswdev.corp.cdw.com/arc/api/data?version=1&dsreq=' + { "version": 1, "highlighting": false, "type": "SQL", "limit": 100, "dimensions": [{ "type": "SIMPLE", "expr": "[project_name] as 'project_name'" }, { "type": "SIMPLE", "expr": "[num_of_models] as 'num_of_models'" }, { "type": "SIMPLE", "expr": "[num_of_cores] as 'num_of_cores'" }, { "type": "SIMPLE", "expr": "[memmory_in_gb] as 'memmory_in_gb'" }, { "type": "SIMPLE", "expr": "[nvidia_gpus] as 'nvidia_gpus'" }, { "type": "SIMPLE", "expr": "[numreplicas] as 'numreplicas'" }], "ksqlStreamPosition": "", "dataset_id": 15 }, { headers: new HttpHeaders(headers) })
+  }
+
+  private chatUser = new BehaviorSubject<boolean>(false);
+  helpWithchat = this.chatUser.asObservable();
+  public callChatopen() {
+    this.chatUser.next(true);
   }
 }

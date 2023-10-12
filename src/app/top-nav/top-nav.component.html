@@ -1,6 +1,13 @@
 <div class="w-100 bg-white h-100 bx-shadow-black">
     <div class="w-98 d-flex h-100 mx-auto align-items-center justify-content-between">
         <p class="mb-0 fs-14 clr-boston-red fw-bolder cr-pointer" (click)="intialRoute()">ML Observability</p>
-        <img src="../../assets/download.png" (click)="logout()" class="w-20 cr-pointer" alt="logout" />
+        <div>
+
+            <span class="me-3">
+                <img src="../../assets/chat.svg" (click)="openpopup()" class="w-30px cr-pointer" alt="logout" />
+            </span>
+
+            <img src="../../assets/download.png" (click)="logout()" class="w-20 cr-pointer" alt="logout" />
+        </div>
     </div>
 </div>

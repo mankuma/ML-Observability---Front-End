@@ -53,6 +53,11 @@ export class DetailsComponent implements OnInit {
     this.routerName = route[route.length - 1];
     this.getEmailcount();
     this.tabChange('mtd');
+    this.userService.helpWithchat.subscribe((res: any) => {
+      if (res === true) {
+        this.openPopup();
+      }
+    })
   }
 
   public getEmailcount() {

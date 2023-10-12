@@ -108,9 +108,7 @@
             </tbody>
         </table>
 
-        <p class="chat-icon mt-5 cr-pointer" (click)="openPopup()">
-            <img style="height: 30px ; width: 40px;" src="assets/chat_icon.png" alt="loading-gif">
-        </p>
+
         <div class="modal modal-chatbot" id="chatbot" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}"
             style="height:80vh">
             <div class="modal-dialog" role="document1">
@@ -120,8 +118,8 @@
                             <span class="mt-2">AVA</span>
                         </div>
                         <div>
-                            <a type="button" (click)="minimize()" class="minm">-</a>
-                            <button type="button" class="close " (click)="closePopup()">x
+                            <a type="button" (click)="minimize()" class="minm me-2 text-decoration-none">-</a>
+                            <button type="button" class="close border-0 px-2 bg-white" (click)="closePopup()">x
                             </button>
                         </div>
                     </div>
@@ -152,7 +150,7 @@
                         <img class="loading-icon" src="assets/loading.gif" alt="loading-gif">
                     </div>
                     <div class="d-flex ml-2 mb-4">
-                        <form class="w-70 d-flex flex-column justify-content-center align-items-center"
+                        <form class="w-70 mx-auto d-flex flex-column justify-content-center align-items-center"
                             (keydown)="keyDownFunction($event)">
                             <p #chatContainer></p>
                             <input type="text" #lname name="lname" class="wi" id="lname">
