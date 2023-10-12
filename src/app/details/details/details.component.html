@@ -47,24 +47,6 @@
                 <app-bar-chart [id]="selectedTab +''+ i" [values]="data"></app-bar-chart>
             </div>
         </div>
-        <!-- <div class="col-lg-6 mt-1 mb-1">
-            <div class="widget bx-show-black border border-dark">
-                <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Converted Carts</p>
-                <canvas class="bar w-100" id="myChart3"></canvas>
-            </div>
-        </div>
-        <div class="col-lg-6 mt-1 mb-1">
-            <div class="widget bx-show-black border border-dark">
-                <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Non Converted Carts</p>
-                <canvas class="bar w-100" id="ctx"></canvas>
-            </div>
-        </div>
-        <div class="col-lg-6 mt-1 mb-1">
-            <div class="widget bx-show-black border border-dark">
-                <p class="bg-tableheader text-dark fw-bolder fs-14 py-2 ps-2">Canceled Carts</p>
-                <canvas class="bar w-100" id="ctx1"></canvas>
-            </div>
-        </div> -->
     </div>
 
     <div class="row ms-0 me-0 mt-5 px-2">
@@ -175,7 +157,7 @@
                             <p #chatContainer></p>
                             <input type="text" #lname name="lname" class="wi" id="lname">
                         </form>
-                        <img [ngClass]="{'cr-pointer':lname.value!='' && actionRequired===true}" class="pl-2"
+                        <img [ngClass]="{'cr-pointer':lname.value!='' && actionRequired===true}" class="pl-2 submit"
                             src="assets/send-green.png"
                             (click)="lname.value!='' && actionRequired===true? updateMessage(lname.value):'' ">
                     </div>

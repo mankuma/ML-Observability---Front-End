@@ -88,13 +88,9 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit() {
-    // this.userService.callUserDetails().subscribe((response: any) => {
-    //   console.log(response);
-    // });
+    this.userService.checkResponse().subscribe((res: any) => {
 
-    // fetch('https://hdfnifidevvh1.corp.cdw.com:9091/nifi-api/counters').then((data) => {
-    //   console.log(data);
-    // }).catch()
+    })
   }
 
   navigateTodetails(name: string) {
