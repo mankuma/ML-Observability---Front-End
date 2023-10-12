@@ -15,7 +15,7 @@ export class GraphComponent {
     disableUrlActionsPopups: true,
     toolbarPosition: ToolbarPosition.TOP,
     onFirstInteractive: (event) => {
-      console.log('On first interactive event!', event);
+      // console.log('On first interactive event!', event);
     }
   };
 }

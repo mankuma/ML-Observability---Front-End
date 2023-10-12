@@ -88,9 +88,9 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.userService.checkResponse().subscribe((res: any) => {
+    // this.userService.checkResponse().subscribe((res: any) => {
 
-    })
+    // })
   }
 
   navigateTodetails(name: string) {

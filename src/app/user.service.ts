@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from './environments/environment';
 
 @Injectable({
@@ -44,9 +44,9 @@ export class UserService {
     return this.http.get(api + '/' + 'v1/api/amanda/YTDreports', { headers: new HttpHeaders(this.headersval) });
   }
 
-  public monthwiseCart(view: string) {
+  public monthwiseCart(view: string): Observable<any> {
     const api = 'http://edswebdvvhil02:8083';
-    return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseTotalCart' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
+    return this.http.get<any>(api + '/' + 'v1/api/amanda/getMonthWiseTotalCart' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getMonthWiseOrderConverted*/
@@ -82,8 +82,9 @@ export class UserService {
 
   /*Chatbot*/
   public getchatbot(reply: string) {
-    const api = 'http://hdfnifidevvh1:9097/file?filename';
-    return this.http.get(api + '=' + reply);
+    const headers1 = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    const api = 'https://hdfnifidevvh1:9097/file?filename';
+    return this.http.get(api + '=' + reply, { responseType: 'text' });
   }
 
 

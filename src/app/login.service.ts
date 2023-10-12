@@ -27,7 +27,7 @@ export class LoginService {
       // localStorage.setItem('expires', JSON.stringify(response.idToken.expiration));
       // localStorage.setItem('loginMailid', response['idTokenClaims'].preferred_username);
       // localStorage.setItem('mailid', response['idTokenClaims'].preferred_username);
-      console.log(response);
+      // console.log(response);
     });
 
     // this.msalService.acquireTokenRedirect('user').subscribe(res => {
