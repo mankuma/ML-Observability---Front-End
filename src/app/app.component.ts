@@ -75,10 +75,7 @@ export class AppComponent implements OnInit {
   }
 
   keyDownFunction(event: any) {
-    if (event.keyCode === 13) {
-      this.lname.nativeElement.value = ''
-      this.updateMessage(this.fullName);
-    }
+    this.updateMessage(event);
   }
 
   displayStyle = "none";

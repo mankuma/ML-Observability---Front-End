@@ -83,7 +83,7 @@ export class UserService {
   /*Chatbot*/
   public getchatbot(reply: string) {
     const headers1 = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    const api = 'https://hdfnifidevvh1:9097/file?filename';
+    const api = 'http://hdfnifidevvh1:9097/file?filename';
     return this.http.get(api + '=' + reply, { responseType: 'text' });
   }
 
