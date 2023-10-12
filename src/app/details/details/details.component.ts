@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from "@angular/core";
 import { Router } from '@angular/router';
 import { ChartConfiguration, ChartData, ChartOptions, ChartType, registerables } from 'chart.js';
 
@@ -11,10 +11,12 @@ Chart.register(...registerables);
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
+
 export class DetailsComponent implements OnInit {
   data = [];
   routerName: string = '';
   public kpiCards: any[] = [];
+  fullName = '';
   public list = [
     {
       name: "Emails Received",
@@ -42,6 +44,7 @@ export class DetailsComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {
 
   }
+
   ngOnInit(): void {
     let route = this.router.url.split('/');
     this.routerName = route[route.length - 1];
@@ -167,10 +170,6 @@ export class DetailsComponent implements OnInit {
 
   };
 
-
-
-
-
   bulidLinechart() {
     const monthWisecart: any = {};
     this.userService.getMonthWiseOrderConverted().subscribe((x: any) => {
@@ -208,7 +207,6 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-
   stackedBarchart() {
     const monthWisecart: any = {};
     this.userService.getMonthWiseOrderNotConverted().subscribe((response: any) => {
@@ -245,7 +243,6 @@ export class DetailsComponent implements OnInit {
       });
     })
   }
-
 
   stackedBarchart1() {
     const monthWisecart: any = {};
@@ -285,6 +282,79 @@ export class DetailsComponent implements OnInit {
 
   }
 
+  chatbotModal: boolean = false;
+  popbotModal: boolean = false;
+  public chatMessages: any[] = [];
+  chatMessage = "";
+  actionRequired: boolean = true;
+  loader: boolean = false;
+  isMinimized = false;
+  @ViewChild('lname', { static: false }) lname: any;
 
+
+  openPopup() {
+    this.displayStyle = "block";
+    this.popbotModal = true;
+    this.chatbotModal = false;
+  }
+
+  @ViewChild('chatContainer', { static: false }) private chatContainer: any;
+  updateMessage(message: string) {
+    this.lname.nativeElement.value = '';
+    this.loader = true;
+    this.actionRequired = false;
+    let chatMessage: any = {};
+    chatMessage['question'] = message;
+    chatMessage['answer'] = "";
+    chatMessage['id'] = Math.floor(Math.random() * 100);
+    this.chatMessages.push(chatMessage);
+    this.userService.getchatbot('reply').subscribe((response: any) => {
+      console.log(response)
+      this.actionRequired = true;
+      this.loader = false;
+      if (response != undefined && response != null) {
+        chatMessage['answer'] = response;
+        this.chatMessages.map((x: any) => {
+          if (x.id === chatMessage['id']) {
+            x.answer = response;
+          }
+        })
+      }
+
+      let element = document.getElementById('myElem');
+      if (element != null) {
+        element.scrollTop = element.scrollHeight;
+      }
+    })
+    // this.reset();
+    // this.scrollToBottom();
+
+  }
+
+  keyDownFunction(event: any) {
+    if (event.keyCode === 13) {
+      this.lname.nativeElement.value = ''
+      this.updateMessage(this.fullName);
+    }
+  }
+
+  displayStyle = "none";
+
+  closePopup() {
+    this.displayStyle = "none";
+    this.popbotModal = false;
+    this.chatbotModal = false;
+    this.chatMessages = [];
+    this.lname.nativeElement.value = ''
+    this.fullName = ''
+  }
+
+  minimize() {
+    this.displayStyle = "none";
+    this.popbotModal = true;
+    this.chatbotModal = true;
+  }
 
 }
+
+
