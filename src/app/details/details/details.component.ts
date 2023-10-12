@@ -61,7 +61,7 @@ export class DetailsComponent implements OnInit {
   }
 
   public getEmailcount() {
-    this.kpiCards = [];
+    let dataval: any[] = [];
     this.userService.getEmailcounters().subscribe((res: any) => {
       if (res['response'].length != 0) {
         let data = this.list;
@@ -71,9 +71,9 @@ export class DetailsComponent implements OnInit {
               x.count = y.count === null ? 0 : y.count;
             }
           });
-          this.kpiCards.push(x);
+          dataval.push(x);
         });
-
+        this.kpiCards = [...dataval];
       } else {
         this.kpiCards = this.list;
       }
