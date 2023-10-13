@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit {
 
     },
     {
-      name: "Email Processed",
+      name: "Emails Processed",
       count: 0,
       fullcount: 0,
       key: "email_after_etl"
