@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ChartConfiguration, ChartData, ChartOptions, ChartType, registerables } from 'chart.js';
 
 import Chart from 'chart.js/auto'
+import { forkJoin } from "rxjs";
 import { UserService } from 'src/app/user.service';
 Chart.register(...registerables);
 
@@ -22,22 +23,26 @@ export class DetailsComponent implements OnInit {
     {
       name: "Emails Received",
       count: 0,
+      fullcount: 0,
       key: "emails_received"
 
     },
     {
       name: "Emails After ETL",
       count: 0,
+      fullcount: 0,
       key: "email_after_etl"
     },
     {
       name: 'Emails Customer Branch',
       count: 0,
+      fullcount: 0,
       key: "emails_customer_branch"
     },
     {
       name: 'Emails AM Branch',
       count: 0,
+      fullcount: 0,
       key: "emails_am_branch"
     }
   ];
@@ -52,39 +57,53 @@ export class DetailsComponent implements OnInit {
     let route = this.router.url.split('/');
     this.routerName = route[route.length - 1];
     this.getEmailcount();
-    this.tabChange('mtd');
+
     this.userService.convertEnvmode.subscribe((res: any) => {
       if (res != '' && res != null && res != undefined) {
         this.tabChange(this.selectedTab);
+      } else {
+        this.tabChange('mtd');
       }
     })
   }
 
   public getEmailcount() {
     let dataval: any[] = [];
-    this.userService.getEmailcounters().subscribe((res: any) => {
-      if (res['response'].length != 0) {
-        let data = this.list;
-        data.map((x: any) => {
-          res['response'].map((y: any) => {
-            if (x.key.toLowerCase() === y.name.toLowerCase()) {
-              x.count = y.count === null ? 0 : y.count;
-            }
-          });
-          dataval.push(x);
-        });
-        this.kpiCards = [...dataval];
-      } else {
-        this.kpiCards = this.list;
+
+    let api1 = this.userService.getEmailcounters();
+    let api2 = this.userService.getEmailcounterstotal();
+    forkJoin([api1, api2]).subscribe(([result1, result2]: any) => {
+      let data = this.list;
+      if (result1['response'].length != 0) {
+        result1.response.map((x: any) => x.time = 15)
       }
+      if (result2['response'].length != 0) {
+        result2.response.map((x: any) => x.time = 24)
+      }
+      let values = [...result1['response'], ...result2['response']];
+      console.log(values);
+      data.map((res: any) => {
+        let dup = values.filter(k => k.name.toLowerCase() === res.key.toLowerCase());
+        if (dup.length != 0) {
+          dup.map((z: any) => {
+            res['count'] = z.time === 15 ? z.count : 0;
+            res['fullcount'] = z.time === 24 ? z.count : 0;
+          })
+        }
+        dataval.push(res);
+      });
+      this.kpiCards = [...dataval];
+
+
     });
+
     this.callApiMethod();
   }
 
   public callApiMethod() {
     setTimeout((x: any) => {
       this.getEmailcount();
-    }, 60000);
+    }, 900000);
   }
 
   public intialLoad() {

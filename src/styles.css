@@ -124,6 +124,22 @@ body {
     width: 20%;
 }
 
+.w-30 {
+    width: 30%;
+}
+
+.w-35 {
+    width: 35%;
+}
+
+.w-65 {
+    width: 65%;
+}
+
+.w-70 {
+    width: 70%;
+}
+
 .cr-pointer {
     cursor: pointer;
 }

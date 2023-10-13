@@ -79,6 +79,11 @@ export class UserService {
     return this.http.get(api + '/' + 'v1/api/amanda/getEmailCounters', { headers: new HttpHeaders(this.headersval) });
   }
 
+  public getEmailcounterstotal() {
+    const api = 'http://edswebdvvhil02:8083';
+    return this.http.get(api + '/' + 'v1/api/amanda/getEmailCountersTotal', { headers: new HttpHeaders(this.headersval) });
+  }
+
 
   /*Chatbot*/
   public getchatbot(reply: string) {

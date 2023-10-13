@@ -84,6 +84,39 @@ export class HomeComponent implements OnInit {
 
   public selectedRow: number = -1;
 
+  accordianValues = [{
+    projectName: 'AMANADA',
+    modelName: 'Model 1',
+    replicas: '0/1',
+    CPU: 0,
+    Memory: '3 GB',
+    createdBy: 'allarak',
+    lastDeployed: '10/10/2023',
+    status: 'In Progress'
+  },
+  {
+    projectName: 'PROPENSITY',
+    modelName: 'Model Propensity',
+    replicas: '1/1',
+    CPU: 2,
+    Memory: '5 GB',
+    createdBy: 'williams',
+    lastDeployed: '02/10/2023',
+    status: 'Building'
+  },
+  {
+    projectName: 'SUPPLY AND DEMAND',
+    modelName: 'Model 2',
+    replicas: '2/5',
+    CPU: 4,
+    Memory: '2 GB',
+    createdBy: 'tom',
+    lastDeployed: '14/09/2022',
+    status: 'Stopped'
+  }];
+
+  accordianObj: any[] = [];
+
   constructor(private userService: UserService, private router: Router) {
 
   }
@@ -105,9 +138,11 @@ export class HomeComponent implements OnInit {
     this.activeProjects = this.activeProjects === true ? false : true;
   }
 
-  public expandAcc(num: number) {
+  public expandAcc(num: number, name: string) {
     if (this.selectedRow != num) {
+      this.accordianObj = this.accordianValues.filter(x => x.projectName === name);
       this.selectedRow = num;
+
     } else {
       this.selectedRow = -1;
     }

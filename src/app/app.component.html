@@ -18,25 +18,28 @@
             </div>
             <!-- #scrollMe [scrollTop]="scrollMe.scrollHeight" -->
             <div class="modal-body scroll">
-                <div class="w-100 mb-5">
-                    <p class="fc-black text-right answer-bg rounded p-2 Answer-align-right mb-3">Hello,how can I help
-                        you!
-                    </p>
-                </div>
-                <br />
+
                 <div *ngIf="chatMessages.length!=0">
                     <div *ngFor="let message of chatMessages ">
-                        <div class="width-80 question-bg question-align-left mb-3">
-                            <p
-                                class="text-left bg-tableheader rounded width-100 d-flex align-items-center mb-0 py-2 px-2">
-                                {{message.question}}</p>
+                        <div class="w-100 d-flex justify-content-start mb-1" *ngIf="message.question != 'model'">
+                            <div class="bg-tableheader fs-14 text-dark d-table p-2 rounded">
+                                {{message.question}} <br /> {{message.para}}
+                            </div>
                         </div>
-                        <div class="width-80 Answer-align-right mb-3">
-                            <div class="answer-bg rounded">
-                                <p id={{message.id}}
-                                    class="text-left  fc-black width-100  flex-column align-items-center mb-0 py-2 px-2"
-                                    *ngIf="message.hasOwnProperty('answer')===true && message.answer!=''"
-                                    [innerHtml]="message.answer"></p>
+                        <div class="w-100 d-flex justify-content-end mb-1" *ngIf="message.question != 'model'">
+                            <div class=" fs-14 text-dark d-table p-2 rounded"
+                                [ngClass]="{'bg-answer': message.answer != ''}">
+                                {{message.answer}}
+                            </div>
+                        </div>
+                        <div *ngIf="message.question === 'model'" class="mb-3">
+                            <div class="card rounded w-70 py-2">
+                                <div class="card-body d-flex justify-content-center">
+                                    <span class="p-2 bg-primary text-white rounded fs-14 cr-pointer"
+                                        (click)="shipping()">Shipping</span>
+                                    <span
+                                        class="p-2 ms-1 bg-primary text-white rounded fs-14 cr-pointer">Tracking</span>
+                                </div>
                             </div>
                         </div>
                     </div>

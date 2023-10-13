@@ -20,11 +20,31 @@ export class AppComponent implements OnInit {
 
   constructor(private userService: UserService) { }
   ngOnInit() {
+    let obj = {
+      'question': 'Hello',
+      'para': 'How can i help you',
+      'answer': ''
+    }
+
     this.userService.helpWithchat.subscribe((res: any) => {
       if (res === true) {
         this.openPopup();
+        this.chatMessages.push(obj);
+        setTimeout((x: any) => {
+          this.callIntro();
+        }, 1000)
+
       }
     })
+  }
+
+
+  public callIntro() {
+    let obj1 = {
+      'question': 'model',
+      'answer': ''
+    }
+    this.chatMessages.push(obj1);
   }
 
   openPopup() {
@@ -93,6 +113,15 @@ export class AppComponent implements OnInit {
     this.displayStyle = "none";
     this.popbotModal = true;
     this.chatbotModal = true;
+  }
+
+  public shipping() {
+    let obj = {
+      'question': 'Please provide Shipping Id',
+      'answer': ''
+    };
+    this.chatMessages.push(obj);
+
   }
 
 

@@ -21,11 +21,19 @@
                 <p
                     class="text-left fw-bolder fs-18 pt-2 px-2 clr-boston-red mb-0 w-100 d-flex align-items-center justify-content-between">
                     {{x.name}}
-                    <img data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Count of emails processed in last 15 minutes" src="../../../assets/info.png"
-                        style="width: 30px; cursor: pointer;" class="pe-2" />
                 </p>
-                <p class="text-left fw-normal fs-24 p-2 clr-yellow">{{x.count}}</p>
+                <table class="w-100 border-0">
+                    <tr class="w-100">
+                        <td class="fs-14 fw-bolder text-dark ps-2 w-35">Last 15 Mins: </td>
+                        <td class="text-left fw-normal fs-24 clr-yellow mb-0 w-65">{{x.count}}</td>
+                    </tr>
+                </table>
+                <table class="w-100 border-0">
+                    <tr class="w-100">
+                        <td class="fs-14 fw-bolder text-dark ps-2 w-35">Last 24 Hours: </td>
+                        <td class="text-left fw-normal fs-24 clr-yellow mb-0 w-65">{{x.fullcount}}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

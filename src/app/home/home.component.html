@@ -84,7 +84,7 @@
                         {{name.createdBy}}
                     </td>
 
-                    <td (click)="expandAcc(i)"
+                    <td (click)="expandAcc(i, name.name)"
                         class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
                         <span class="expand cr-pointer">{{name.quality}}</span>
                     </td>
@@ -103,16 +103,32 @@
                     <td colspan="9" class="border border-dark">
                         <div class="w-100 d-flex align-items-center justify-content-between">
                             <p class="mb-0 p-2">
-                                <span class="fs-12 font-weight-bolder text-dark">Name:</span>
-                                <span class="fs-14 font-weight-normal text-dark">{{name.name}}</span>
+                                <span class="fs-12 font-weight-bolder text-dark">Model Name: </span>
+                                <span class="fs-14 fw-bolder ps-1 text-dark">{{accordianObj[0].modelName}}</span>
                             </p>
                             <p class="mb-0 p-2">
-                                <span class="fs-12 font-weight-bolder text-dark">Status:</span>
-                                <span class="fs-14 font-weight-normal text-dark">{{name.performance}}</span>
+                                <span class="fs-12 font-weight-bolder text-dark">Status: </span>
+                                <span class="fs-14 fw-bolder ps-1 text-dark">{{accordianObj[0].status}}</span>
                             </p>
                             <p class="mb-0 p-2">
-                                <span class="fs-12 font-weight-bolder text-dark">Last 30 days volume:</span>
-                                <span class="fs-14 font-weight-normal text-dark">{{name.volume}}</span>
+                                <span class="fs-12 font-weight-bolder text-dark">Replicas:</span>
+                                <span class="fs-14 fw-bolder ps-1 text-dark">{{accordianObj[0].replicas}}</span>
+                            </p>
+                            <p class="mb-0 p-2">
+                                <span class="fs-12 font-weight-bolder text-dark">CPU:</span>
+                                <span class="fs-14 fw-bolder ps-1 text-dark">{{accordianObj[0].CPU}}</span>
+                            </p>
+                            <p class="mb-0 p-2">
+                                <span class="fs-12 font-weight-bolder text-dark">Memory:</span>
+                                <span class="fs-14 fw-bolder ps-1 text-dark">{{accordianObj[0].Memory}}</span>
+                            </p>
+                            <p class="mb-0 p-2">
+                                <span class="fs-12 font-weight-bolder text-dark">Model Created By:</span>
+                                <span class="fs-14 fw-bolder ps-1 text-dark">{{accordianObj[0].createdBy}}</span>
+                            </p>
+                            <p class="mb-0 p-2">
+                                <span class="fs-12 font-weight-bolder text-dark">Model Last Deployed:</span>
+                                <span class="fs-14 fw-bolder ps-1 text-dark">{{accordianObj[0].lastDeployed}}</span>
                             </p>
                         </div>
                     </td>
