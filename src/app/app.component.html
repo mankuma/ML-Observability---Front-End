@@ -33,12 +33,17 @@
                             </div>
                         </div>
                         <div *ngIf="message.question === 'model'" class="mb-3">
-                            <div class="card rounded w-70 py-2">
-                                <div class="card-body d-flex justify-content-center">
-                                    <span class="p-2 bg-primary text-white rounded fs-14 cr-pointer"
-                                        (click)="shipping()">Shipping</span>
-                                    <span
-                                        class="p-2 ms-1 bg-primary text-white rounded fs-14 cr-pointer">Tracking</span>
+                            <div class="card rounded w-100 py-2">
+                                <div class="card-body">
+                                    <div class="w-90 mx-auto">
+                                        <div class="row">
+                                            <div class="col-lg-6 mb-3" *ngFor="let list of buttonsList">
+                                                <span class="p-2 bg-primary text-white rounded fs-14 cr-pointer"
+                                                    (click)="shipping(list.message)">{{list.name}}</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

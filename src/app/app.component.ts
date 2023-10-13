@@ -18,6 +18,22 @@ export class AppComponent implements OnInit {
   @ViewChild('lname', { static: false }) lname: any;
   fullName = '';
 
+  public buttonsList = [{
+    name: 'Shipping Tracking',
+    arg: 'shipping',
+    message: 'Please provide Shipment Tracking Id'
+  },
+  {
+    name: 'Cart Creation',
+    arg: 'cart',
+    message: 'Please provide product details'
+  },
+  {
+    name: 'Fraud Detection',
+    arg: 'fraud',
+    message: 'provide details to proceed ...'
+  }]
+
   constructor(private userService: UserService) { }
   ngOnInit() {
     let obj = {
@@ -115,9 +131,9 @@ export class AppComponent implements OnInit {
     this.chatbotModal = true;
   }
 
-  public shipping() {
+  public shipping(name: string) {
     let obj = {
-      'question': 'Please provide Shipping Id',
+      'question': name,
       'answer': ''
     };
     this.chatMessages.push(obj);
