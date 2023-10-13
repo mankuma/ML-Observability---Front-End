@@ -81,7 +81,7 @@ export class DetailsComponent implements OnInit {
         result2.response.map((x: any) => x.time = 24)
       }
       let values = [...result1['response'], ...result2['response']];
-      console.log(values);
+
       data.map((res: any) => {
         let dup = values.filter(k => k.name.toLowerCase() === res.key.toLowerCase());
         if (dup.length != 0) {
