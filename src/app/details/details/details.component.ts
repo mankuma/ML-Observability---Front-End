@@ -60,7 +60,8 @@ export class DetailsComponent implements OnInit {
 
     this.userService.convertEnvmode.subscribe((res: any) => {
       if (res != '' && res != null && res != undefined) {
-        this.tabChange(this.selectedTab);
+        let arg = this.selectedTab === '' ? 'mtd' : this.selectedTab;
+        this.tabChange(arg);
       } else {
         this.tabChange('mtd');
       }
