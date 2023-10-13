@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { TableauModule } from 'ngx-tableau';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -30,7 +31,8 @@ import { TableauModule } from 'ngx-tableau';
     FormsModule,
     CommonModule,
     HttpClientModule,
-    TableauModule
+    TableauModule,
+    NgSelectModule
 
 
 

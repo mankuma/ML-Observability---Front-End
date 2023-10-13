@@ -98,4 +98,10 @@ export class UserService {
   public callChatopen() {
     this.chatUser.next(true);
   }
+
+  private changeEnv = new BehaviorSubject<string>('');
+  convertEnvmode = this.changeEnv.asObservable();
+  public sendEnvtype(type: string) {
+    this.changeEnv.next(type);
+  }
 }

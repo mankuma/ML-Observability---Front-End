@@ -11,3 +11,16 @@
 .cr-pointer {
     cursor: pointer;
 }
+
+::ng-deep.ng-select .ng-select-container {
+    border: 0px solid #fff !important;
+    background-color: #dbdbdc !important;
+    color: black !important;
+    border-radius: 0px !important;
+    width: 100px !important;
+    padding-left: 0.5rem;
+    font-size: 15px;
+    font-family: 'Prelo-SemiBold', xcond-black;
+    min-height: 30px !important;
+    max-height: 30px !important;
+}
