@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from './user.service';
+import { ServerError } from '@azure/msal-browser';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent implements OnInit {
 
   chatbotModal: boolean = false;
@@ -16,30 +18,52 @@ export class AppComponent implements OnInit {
   loader: boolean = false;
   isMinimized = false;
   @ViewChild('lname', { static: false }) lname: any;
-  fullName = '';
+  @ViewChild('chatContainer', { static: false }) private chatContainer: any;
 
-  public buttonsList = [{
-    name: 'Shipping Tracking',
-    arg: 'shipping',
-    message: 'Please provide Shipment Tracking Id'
-  },
-  {
-    name: 'Cart Creation',
-    arg: 'cart',
-    message: 'Please provide product details'
-  },
-  {
-    name: 'Fraud Detection',
-    arg: 'fraud',
-    message: 'provide details to proceed ...'
-  }]
+  fullName = '';
+  displayStyle = "none";
+  type: string = '';
+
+  public buttonsList = [
+    {
+      name: 'Shipment Tracking',
+      arg: 'shipment',
+      message: 'Please provide Shipment Tracking Id'
+    },
+    {
+      name: 'Cart Creation',
+      arg: 'cart',
+      message: ''
+    },
+    {
+      name: 'Fraud Detection',
+      arg: 'fraud',
+      message: 'provide details to proceed ...'
+    }]
+
+  public cart_List = [
+    {
+      name: 'Product - 1',
+      arg: 'shipment',
+      message: 'Product - 1'
+    },
+    {
+      name: 'Product - 2',
+      arg: 'cart',
+      message: 'Product - 1'
+    },
+    {
+      name: 'Product - 3',
+      arg: 'fraud',
+      message: 'Product - 1'
+    }]
 
   constructor(private userService: UserService) { }
+
   ngOnInit() {
     let obj = {
-      'question': 'Hello',
-      'para': 'How can i help you',
-      'answer': ''
+      'system': 'Hello',
+      'para': 'I am AVA',
     }
 
     this.userService.helpWithchat.subscribe((res: any) => {
@@ -47,20 +71,17 @@ export class AppComponent implements OnInit {
         this.openPopup();
         this.chatMessages.push(obj);
         setTimeout((x: any) => {
-          this.callIntro();
+          this.callIntro('model');
         }, 1000)
-
       }
     })
   }
 
-
-  public callIntro() {
-    let obj1 = {
-      'question': 'model',
-      'answer': ''
+  public callIntro(name: string) {
+    let obj = {
+      'system': name,
     }
-    this.chatMessages.push(obj1);
+    this.chatMessages.push(obj);
   }
 
   openPopup() {
@@ -69,52 +90,42 @@ export class AppComponent implements OnInit {
     this.chatbotModal = false;
   }
 
-  @ViewChild('chatContainer', { static: false }) private chatContainer: any;
   updateMessage(message: string) {
     this.lname.nativeElement.value = '';
     this.loader = true;
     this.actionRequired = false;
     let chatMessage: any = {};
-    chatMessage['question'] = message;
-    chatMessage['answer'] = "";
-    chatMessage['id'] = Math.floor(Math.random() * 100);
+    chatMessage['user'] = message;
     this.chatMessages.push(chatMessage);
-    this.userService.getchatbot(message).subscribe((response: any) => {
+    this.userService.getchatbot(this.concatenate(this.type, message), message).subscribe((response: any) => {
       this.actionRequired = true;
       this.loader = false;
       if (response != undefined && response != null) {
-        chatMessage['answer'] = response;
-        this.chatMessages.map((x: any) => {
-          if (x.id === chatMessage['id']) {
-            x.answer = response;
-          }
-        })
+        let serveMessage: any = {};
+        serveMessage['system'] = response;
+        this.chatMessages.push(serveMessage);
       }
+      setTimeout((x: any) => {
+        this.callIntro('model');
+      }, 1000)
 
     }, err => {
 
       this.actionRequired = true;
       this.loader = false;
 
-      chatMessage['answer'] = err.error.text;
+      chatMessage['user'] = err.error.text;
       this.chatMessages.map((x: any) => {
         if (x.id === chatMessage['id']) {
-          x.answer = err.error.text;
+          x.user = err.error.text;
         }
       })
-
-
     })
-    // this.reset();
-    // this.scrollToBottom();
-
   }
 
   keyDownFunction(event: any) {
     this.updateMessage(event);
   }
-
-  displayStyle = "none";
 
   closePopup() {
     this.displayStyle = "none";
@@ -131,17 +142,33 @@ export class AppComponent implements OnInit {
     this.chatbotModal = true;
   }
 
-  public shipping(name: string) {
-    let obj = {
-      'question': name,
-      'answer': ''
-    };
-    this.chatMessages.push(obj);
-
+  public shipping(name: string, type: string) {
+    this.type = type;
+    if (this.type === 'cart')
+      this.callIntro('cart')
+    else {
+      let cart = {
+        'system': name,
+        'user': ''
+      };
+      this.chatMessages.push(cart);
+    }
   }
 
-
   ngOnDestroy(): void {
+  }
+
+  public concatenate(type: string, message: string) {
+    switch (type) {
+      case 'shipment':
+        return 'Plese provide shipment tracking details of ' + message;
+      case 'cart':
+        return 'Add ' + message + 'to cart';
+      case 'fraud':
+        return 'please provide fraud detection id' + message;
+      default:
+        return '';
+    }
 
   }
 }
