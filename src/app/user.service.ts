@@ -86,15 +86,14 @@ export class UserService {
 
 
   /*Chatbot*/
-  public getchatbot(question: string, reply: string) {
+  public getchatbot(question: string) {
     const headers1 = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    //const api = 'http://hdfnifidevvh1:9097/file?filename';
     const api = 'http://hdfnifidevvh1.corp.cdw.com:9097/api?frombot=avaweb' +
       '& address_from=' + '' +
-      '& addresses_to=' + '' +
+      '& addresses_to=' + 'amanda@cdw.com' +
       '& email_body_nosig_ascii_cleaned=' + question +
-      '& email_date=' + new Date().toJSON() +
-      '& filename=' + reply
+      '& email_date=' + new Date().toJSON()
+
     return this.http.get(api, { responseType: 'text' });
   }
 

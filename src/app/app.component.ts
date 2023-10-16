@@ -44,19 +44,20 @@ export class AppComponent implements OnInit {
   public cart_List = [
     {
       name: 'Product - 1',
-      arg: 'shipment',
+      isChecked: false,
       message: 'Product - 1'
     },
     {
       name: 'Product - 2',
-      arg: 'cart',
-      message: 'Product - 1'
+      isChecked: false,
+      message: 'Product - 2'
     },
     {
       name: 'Product - 3',
-      arg: 'fraud',
-      message: 'Product - 1'
+      isChecked: false,
+      message: 'Product - 3'
     }]
+
 
   constructor(private userService: UserService) { }
 
@@ -97,7 +98,7 @@ export class AppComponent implements OnInit {
     let chatMessage: any = {};
     chatMessage['user'] = message;
     this.chatMessages.push(chatMessage);
-    this.userService.getchatbot(this.concatenate(this.type, message), message).subscribe((response: any) => {
+    this.userService.getchatbot(this.concatenate(this.type, message)).subscribe((response: any) => {
       this.actionRequired = true;
       this.loader = false;
       if (response != undefined && response != null) {
@@ -161,14 +162,24 @@ export class AppComponent implements OnInit {
   public concatenate(type: string, message: string) {
     switch (type) {
       case 'shipment':
-        return 'Plese provide shipment tracking details of ' + message;
+        return 'Please provide shipment tracking details of ' + message;
       case 'cart':
-        return 'Add ' + message + 'to cart';
+        return 'Create cart for products ' + this.selectProduct;
       case 'fraud':
         return 'please provide fraud detection id' + message;
       default:
         return '';
     }
 
+  }
+  selectProduct: any;
+  public selectedCheckbox() {
+    let checkedValues = this.cart_List.filter(x => x.isChecked == true);
+    this.selectProduct = checkedValues.map(x => x.name);
+    this.updateMessage('')
+  }
+
+  public onCheckChange(event: any) {
+    this.cart_List[event].isChecked = this.cart_List[event].isChecked === false ? true : false;
   }
 }
