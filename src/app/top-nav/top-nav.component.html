@@ -1,17 +1,22 @@
 <div class="w-100 bg-white h-100 bx-shadow-black">
     <div class="w-98 d-flex h-100 mx-auto align-items-center justify-content-between">
-        <p class="mb-0 fs-14 clr-boston-red fw-bolder cr-pointer w-50" (click)="intialRoute()">ML Observability</p>
+        <p class="mb-0 fs-14 clr-boston-red fw-bolder cr-pointer w-50 fs-18" (click)="intialRoute()">ML Observability
+        </p>
         <div class="w-50">
             <div class="w-100 d-flex justify-content-end align-items-center">
                 <span class="me-3">
                     <ng-select [clearable]="false" [searchable]="false" [(ngModel)]="selectedEnvironment"
                         (change)="changeEnv(selectedEnvironment)">
-                        <ng-option *ngFor="let server of serverList" [value]="server.id">{{server.name}}</ng-option>
+                        <ng-option *ngFor="let server of serverList" [value]="server.id">
+                            <span class="fs-14 fw-bolder">{{server.name}}</span>
+                        </ng-option>
                     </ng-select>
                 </span>
 
                 <span class="me-3">
-                    <img src="../../assets/chat.svg" (click)="openpopup()" class="w-30px cr-pointer" alt="logout" />
+                    <p class="border border-dark rounded fs-14 fw-bolder px-2 mb-0 cr-pointer" (click)="openpopup()">Ask
+                        AVA</p>
+                    <!-- <img src="../../assets/chat.svg" (click)="openpopup()" class="w-30px cr-pointer" alt="logout" /> -->
                 </span>
 
                 <img src="../../assets/download.png" (click)="logout()" class="w-20 cr-pointer" alt="logout" />

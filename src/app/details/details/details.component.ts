@@ -82,14 +82,13 @@ export class DetailsComponent implements OnInit {
         result2.response.map((x: any) => x.time = 24)
       }
       let values = [...result1['response'], ...result2['response']];
-
       data.map((res: any) => {
         let dup = values.filter(k => k.name.toLowerCase() === res.key.toLowerCase());
         if (dup.length != 0) {
-          dup.map((z: any) => {
-            res['count'] = z.time === 15 ? z.count : 0;
-            res['fullcount'] = z.time === 24 ? z.count : 0;
-          })
+          let arr1 = dup.filter(k => k.time === 15);
+          let arr2 = dup.filter(k => k.time === 24);
+          res['count'] = arr1.length != 0 ? arr1[0]['count'] : 0;
+          res['fullcount'] = arr2.length != 0 ? arr2[0]['count'] : 0;
         }
         dataval.push(res);
       });
