@@ -17,7 +17,7 @@
                 </div>
             </div>
             <!-- #scrollMe [scrollTop]="scrollMe.scrollHeight" -->
-            <div class="modal-body scroll">
+            <div class="modal-body scroll" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 
                 <div *ngIf="chatMessages.length!=0">
                     <div *ngFor="let message of chatMessages ">

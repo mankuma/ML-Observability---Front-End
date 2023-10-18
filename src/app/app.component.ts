@@ -111,7 +111,6 @@ export class AppComponent implements OnInit {
       }, 1000)
 
     }, err => {
-
       this.actionRequired = true;
       this.loader = false;
 
