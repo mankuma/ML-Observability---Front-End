@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { UserService } from './user.service';
-import { ServerError } from '@azure/msal-browser';
+import { AuthenticationResult, EventMessage, EventType, InteractionStatus, PopupRequest, RedirectRequest, ServerError } from '@azure/msal-browser';
+import { MSAL_GUARD_CONFIG, MsalBroadcastService, MsalGuardConfiguration, MsalService } from '@azure/msal-angular';
+import { Subject, filter, forkJoin, takeUntil } from 'rxjs';
+import { environment } from './environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +26,10 @@ export class AppComponent implements OnInit {
   fullName = '';
   displayStyle = "none";
   type: string = '';
+
+  isIframe = false;
+  loginDisplay = false;
+  private readonly _destroying$ = new Subject<void>();
 
   public buttonsList = [
     {
@@ -59,30 +66,53 @@ export class AppComponent implements OnInit {
     }]
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
+    private authService: MsalService,
+    private msalBroadcastService: MsalBroadcastService) { }
 
   ngOnInit() {
+    this.login();
     let obj = {
       'system': 'Hello',
       'para': 'I am AVA',
+      'para1': 'How can i help Today'
     }
 
     this.userService.helpWithchat.subscribe((res: any) => {
       if (res === true) {
         this.openPopup();
         this.chatMessages.push(obj);
-        setTimeout((x: any) => {
-          this.callIntro('model');
-        }, 1000)
       }
     })
   }
 
-  public callIntro(name: string) {
-    let obj = {
-      'system': name,
-    }
-    this.chatMessages.push(obj);
+  login() {
+    this.isIframe = window !== window.parent && !window.opener; // Remove this line to use Angular Universal
+    this.setLoginDisplay();
+
+    this.authService.instance.enableAccountStorageEvents(); // Optional - This will enable ACCOUNT_ADDED and ACCOUNT_REMOVED events emitted when a user logs in or out of another tab or window
+    this.msalBroadcastService.msalSubject$
+      .pipe(
+        filter((msg: EventMessage) => msg.eventType === EventType.ACCOUNT_ADDED || msg.eventType === EventType.ACCOUNT_REMOVED),
+      )
+      .subscribe((result: EventMessage) => {
+        if (this.authService.instance.getAllAccounts().length === 0) {
+          window.location.pathname = "/";
+        } else {
+          this.setLoginDisplay();
+        }
+      });
+
+    this.msalBroadcastService.inProgress$
+      .pipe(
+        filter((status: InteractionStatus) => status === InteractionStatus.None),
+        takeUntil(this._destroying$)
+      )
+      .subscribe(() => {
+        this.setLoginDisplay();
+        this.checkAndSetActiveAccount();
+      })
   }
 
   openPopup() {
@@ -98,6 +128,28 @@ export class AppComponent implements OnInit {
     let chatMessage: any = {};
     chatMessage['user'] = message;
     this.chatMessages.push(chatMessage);
+    this.callModelapi(message);
+  }
+
+  callModelapi(message: string) {
+    let quoteAccess = { "accessKey": environment.quoteAccesskey, "request": { "email_body": message } }
+    let shipmentAccess = { "accessKey": environment.shipmentAccesskey, "request": { "email_body": message } }
+    let res = this.userService.modelResponse(quoteAccess);
+    let res1 = this.userService.modelResponse(shipmentAccess);
+    forkJoin(res, res1).subscribe((result: any) => {
+      if (result[0]?.response === "0" && result[1]?.response === "0") {
+        this.loader = false;
+        let chatMessage: any = {};
+        chatMessage['system'] = 'We can help you on shipment tracking and creating quotes';
+        this.chatMessages.push(chatMessage);
+      } else {
+        this.getResponseFromNifi(message);
+      }
+    })
+  }
+
+  getResponseFromNifi(message: string) {
+    let chatMessage: any = {};
     this.userService.getchatbot(this.concatenate(this.type, message)).subscribe((response: any) => {
       this.actionRequired = true;
       this.loader = false;
@@ -106,14 +158,9 @@ export class AppComponent implements OnInit {
         serveMessage['system'] = response;
         this.chatMessages.push(serveMessage);
       }
-      setTimeout((x: any) => {
-        this.callIntro('model');
-      }, 1000)
-
     }, err => {
       this.actionRequired = true;
       this.loader = false;
-
       chatMessage['user'] = err.error.text;
       this.chatMessages.map((x: any) => {
         if (x.id === chatMessage['id']) {
@@ -144,19 +191,17 @@ export class AppComponent implements OnInit {
 
   public shipping(name: string, type: string) {
     this.type = type;
-    if (this.type === 'cart')
-      this.callIntro('cart')
-    else {
-      let cart = {
-        'system': name,
-        'user': ''
-      };
-      this.chatMessages.push(cart);
-    }
+    // if (this.type === 'cart')
+    //   // this.callIntro('cart')
+    // else {
+    //   let cart = {
+    //     'system': name,
+    //     'user': ''
+    //   };
+    //   this.chatMessages.push(cart);
+    // }
   }
 
-  ngOnDestroy(): void {
-  }
 
   public concatenate(type: string, message: string) {
     switch (type) {
@@ -180,5 +225,61 @@ export class AppComponent implements OnInit {
 
   public onCheckChange(event: any) {
     this.cart_List[event].isChecked = this.cart_List[event].isChecked === false ? true : false;
+  }
+
+  setLoginDisplay() {
+    console.log(this.authService.instance.getAllAccounts());
+    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+  }
+
+  checkAndSetActiveAccount() {
+    /**
+     * If no active account set but there are accounts signed in, sets first account to active account
+     * To use active account set here, subscribe to inProgress$ first in your component
+     * Note: Basic usage demonstrated. Your app may require more complicated account selection logic
+     */
+    let activeAccount = this.authService.instance.getActiveAccount();
+
+    if (!activeAccount && this.authService.instance.getAllAccounts().length > 0) {
+      let accounts = this.authService.instance.getAllAccounts();
+      this.authService.instance.setActiveAccount(accounts[0]);
+    }
+  }
+
+  loginRedirect() {
+    if (this.msalGuardConfig.authRequest) {
+      this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
+    } else {
+      this.authService.loginRedirect();
+    }
+  }
+
+  loginPopup() {
+    if (this.msalGuardConfig.authRequest) {
+      this.authService.loginPopup({ ...this.msalGuardConfig.authRequest } as PopupRequest)
+        .subscribe((response: AuthenticationResult) => {
+          this.authService.instance.setActiveAccount(response.account);
+        });
+    } else {
+      this.authService.loginPopup()
+        .subscribe((response: AuthenticationResult) => {
+          this.authService.instance.setActiveAccount(response.account);
+        });
+    }
+  }
+
+  logout(popup?: boolean) {
+    if (popup) {
+      this.authService.logoutPopup({
+        mainWindowRedirectUri: "/"
+      });
+    } else {
+      this.authService.logoutRedirect();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this._destroying$.next(undefined);
+    this._destroying$.complete();
   }
 }

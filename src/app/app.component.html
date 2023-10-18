@@ -2,8 +2,8 @@
 
 
 
-<div class="modal modal-chatbot" id="chatbot" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}"
-    style="height:80vh">
+<div class="modal modal-chatbot" data-bs-target="#staticBackdrop" id="chatbot" tabindex="-1" role="dialog"
+    [ngStyle]="{'display':displayStyle}" style="height:80vh">
     <div class="modal-dialog" role="document1">
         <div class="modal-content widt ">
             <div class="modal-header  b-1px heig d-flex align-items-center justify-content-between">
@@ -22,58 +22,16 @@
                 <div *ngIf="chatMessages.length!=0">
                     <div *ngFor="let message of chatMessages ">
                         <div class="w-100 d-flex justify-content-start mb-1"
-                            *ngIf="message.system != 'model' && message.system != 'cart' && message.hasOwnProperty('system') === true">
+                            *ngIf="message.hasOwnProperty('system') === true">
                             <div class="bg-tableheader fs-14 text-dark d-table p-2 rounded">
-                                {{message.system}} <br /> {{message.para}}
+                                {{message.system}} <br /> {{message.para}} <br /> {{message.para1}}
                             </div>
                         </div>
                         <div class="w-100 d-flex justify-content-end mb-1"
-                            *ngIf="message.system != 'model' && message.system != 'cart' && message.hasOwnProperty('user') === true">
+                            *ngIf="message.hasOwnProperty('user') === true">
                             <div class=" fs-14 text-dark d-table p-2 rounded"
                                 [ngClass]="{'bg-answer': message.user != ''}">
                                 {{message.user}}
-                            </div>
-                        </div>
-                        <div *ngIf="message.system === 'model'" class="mb-3 mt-3">
-                            <div class="card rounded w-100 py-2">
-                                <div class="card-body p-0">
-                                    <p class="fs-14 px-2">How can I help</p>
-                                    <div class="w-90 mx-auto pr-1">
-                                        <div class="row">
-                                            <div class="col-lg-6 mb-3" *ngFor="let list of buttonsList">
-                                                <span class="p-2 bg-primary text-white rounded fs-14 cr-pointer"
-                                                    (click)="shipping(list.message, list.arg)">
-                                                    {{list.name}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div *ngIf="message.system === 'cart'" class="mb-3 mt-3">
-                            <div class="card rounded w-100 py-2">
-                                <div class="card-body p-0 mt-2">
-                                    <div class="w-90 mx-auto pr-1">
-                                        <div class="row">
-                                            <div class="col-lg-12 mb-3">
-                                                <div class="form-check"
-                                                    *ngFor="let checkboxname of cart_List; let i = index">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault" (change)="onCheckChange(i)">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        {{checkboxname.message}}
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="w-100 d-flex justify-content-end">
-                                                <span [ngClass]="{'cr-pointer':true}"
-                                                    class="bg-primary px-2 py-1 me-2 text-white rounded"
-                                                    (click)="selectedCheckbox()">submit</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

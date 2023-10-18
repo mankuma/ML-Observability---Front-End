@@ -14,7 +14,10 @@ export const environment = {
     redirectURI: "http://localhost:4200/",
     authority: "https://login.microsoftonline.com/de9231de-45f4-4325-ae07-8ae72052517e",
     scopes: ['user.read'],
-    uri: 'https://graph.microsoft.com/v1.0/me'
+    uri: 'https://graph.microsoft.com/v1.0/me',
+    apiUrl: "https://edswebdvvhil02.corp.cdw.com:8084",
+    shipmentAccesskey: 'mbalfdt1cpcrmh7ok4dfj78f8yoset6m',
+    quoteAccesskey: 'mf43mj2foj38tbdtbky0l60vpr30n0pb'
 };
 
 

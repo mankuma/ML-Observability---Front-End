@@ -34,53 +34,53 @@ export class UserService {
 
 
   public gettoptenamwisecartdetails() {
-    const api = 'http://edswebdvvhil02:8083';
+    const api = environment.apiUrl;
     return this.http.get(api + '/' + 'v1/api/amanda/gettoptenamwisecartdetails', { headers: new HttpHeaders(this.headersval) });
   }
 
 
   public callUserDetails() {
-    const api = 'http://edswebdvvhil02:8083';
+    const api = environment.apiUrl;
     return this.http.get(api + '/' + 'v1/api/amanda/YTDreports', { headers: new HttpHeaders(this.headersval) });
   }
 
   public monthwiseCart(view: string): Observable<any> {
-    const api = 'http://edswebdvvhil02:8083';
+    const api = environment.apiUrl;
     return this.http.get<any>(api + '/' + 'v1/api/amanda/getMonthWiseTotalCart' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getMonthWiseOrderConverted*/
   public getMonthWiseOrderConverted(view: string) {
-    const api = 'http://edswebdvvhil02:8083';
+    const api = environment.apiUrl;
     return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderConverted' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getMonthWiseTotalCart*/
   public getMonthWiseTotalCart(view: string) {
-    const api = 'http://edswebdvvhil02:8083';
+    const api = environment.apiUrl;
     return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseTotalCart' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getMonthWiseOrderNotConverted*/
   public getMonthWiseOrderNotConverted(view: string) {
-    const api = 'http://edswebdvvhil02:8083';
+    const api = environment.apiUrl;
     return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderNotConverted' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getMonthWiseOrderCancel*/
   public getMonthWiseOrderCancel(view: string) {
-    const api = 'http://edswebdvvhil02:8083';
+    const api = environment.apiUrl;
     return this.http.get(api + '/' + 'v1/api/amanda/getMonthWiseOrderCancel' + '?view=' + view + '&server_type=' + environment.type, { headers: new HttpHeaders(this.headersval) });
   }
 
   /*getEmailCounters*/
   public getEmailcounters() {
-    const api = 'http://edswebdvvhil02:8083';
+    const api = environment.apiUrl;
     return this.http.get(api + '/' + 'v1/api/amanda/getEmailCounters', { headers: new HttpHeaders(this.headersval) });
   }
 
   public getEmailcounterstotal() {
-    const api = 'http://edswebdvvhil02:8083';
+    const api = environment.apiUrl;
     return this.http.get(api + '/' + 'v1/api/amanda/getEmailCountersTotal', { headers: new HttpHeaders(this.headersval) });
   }
 
@@ -100,7 +100,15 @@ export class UserService {
 
   public checkResponse() {
     let headers = { Authorization: 'apikey R6j3HUbEuP04AsTtsVJYycwP8GkyS569K5JHPKAjArGEiYqp' };
+    //let obj = { "accessKey": "mbalfdt1cpcrmh7ok4dfj78f8yoset6m", "request": { "email_body": "get the shipment details of 324ret3t" } }
+    // let obj = { "accessKey": "mf43mj2foj38tbdtbky0l60vpr30n0pb", "request": { "email_body": "create a quote for me" } };
     return this.http.get('http://modelvisualizationtesting.cdswdev.corp.cdw.com/arc/api/data?version=1&dsreq=' + { "version": 1, "highlighting": false, "type": "SQL", "limit": 100, "dimensions": [{ "type": "SIMPLE", "expr": "[project_name] as 'project_name'" }, { "type": "SIMPLE", "expr": "[num_of_models] as 'num_of_models'" }, { "type": "SIMPLE", "expr": "[num_of_cores] as 'num_of_cores'" }, { "type": "SIMPLE", "expr": "[memmory_in_gb] as 'memmory_in_gb'" }, { "type": "SIMPLE", "expr": "[nvidia_gpus] as 'nvidia_gpus'" }, { "type": "SIMPLE", "expr": "[numreplicas] as 'numreplicas'" }], "ksqlStreamPosition": "", "dataset_id": 15 }, { headers: new HttpHeaders(headers) })
+    // return this.http.post('http://modelservice.cdsw.corp.cdw.com/model', obj);
+    //we can help you on shipment tracking and creating quotes
+  }
+
+  public modelResponse(obj: any) {
+    return this.http.post('http://modelservice.cdsw.corp.cdw.com/model', obj);
   }
 
   private chatUser = new BehaviorSubject<boolean>(false);
