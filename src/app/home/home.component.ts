@@ -117,6 +117,25 @@ export class HomeComponent implements OnInit {
 
   accordianObj: any[] = [];
 
+  models: any[] = [{
+    'name': 'Model 1',
+    'status': "In Progress",
+    "replica": "10 / 20",
+    "cpu": "2",
+    "memory": "16 GB",
+    "createdBy": "allarak",
+    "deployedOn": "10/10/2023"
+  },
+  {
+    'name': 'Model 2',
+    'status': "Running",
+    "replica": "5 / 10",
+    "cpu": "2",
+    "memory": "6 GB",
+    "createdBy": "will",
+    "deployedOn": "18/10/2022"
+  }]
+
   constructor(private userService: UserService, private router: Router) {
 
   }

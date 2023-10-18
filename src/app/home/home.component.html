@@ -85,8 +85,10 @@
                     </td>
 
                     <td (click)="expandAcc(i, name.name)"
-                        class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
-                        <span class="expand cr-pointer">{{name.quality}}</span>
+                        class=" cr-pointer w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
+                        <span class="expand">{{name.quality}}</span> <img style="width: 15px;"
+                            src="../../assets/down.png" *ngIf="selectedRow !== i" />
+                        <img style="width: 15px;" src="../../assets/up.png" *ngIf="selectedRow === i" />
                     </td>
                     <td class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 ff-p-sb pt-1">
                         {{name.performance}}
@@ -100,7 +102,7 @@
 
                 </tr>
                 <tr *ngIf="selectedRow === i">
-                    <td colspan="9" class="border border-dark">
+                    <td colspan="9" class="border border-dark" *ngIf="selectedRow != 0">
                         <div class="w-100 d-flex align-items-center justify-content-between">
                             <p class="mb-0 p-2">
                                 <span class="fs-12 font-weight-bolder text-dark">Model Name: </span>
@@ -130,6 +132,76 @@
                                 <span class="fs-12 font-weight-bolder text-dark">Model Last Deployed:</span>
                                 <span class="fs-14 fw-bolder ps-1 text-dark">{{accordianObj[0].lastDeployed}}</span>
                             </p>
+                        </div>
+
+                    </td>
+                    <td colspan="9" class="border border-dark" *ngIf="selectedRow === 0">
+                        <div class="w-98 mx-auto my-3">
+                            <table class="bg-tableheader mainTable">
+                                <thead>
+                                    <tr>
+                                        <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0">
+                                            Model Name
+                                        </th>
+                                        <th
+                                            Class="w-10 ps-2 py-2 fs-14 text-left border border-dark border-bottom-0 border-start-0">
+                                            Status
+                                        </th>
+                                        <th
+                                            Class="w-15 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0 border-strat-0">
+                                            Replicas
+                                        </th>
+
+                                        <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                                            CPU
+                                        </th>
+
+                                        <th Class="w-10 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                                            Memory
+                                        </th>
+                                        <th Class="w-20 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                                            Model Created By
+                                        </th>
+                                        <th Class="w-15 ps-2 py-2 fs-14 text-left border border-dark  border-bottom-0">
+                                            Last Deployed On
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white tBody" *ngFor="let name of models; let i = index">
+                                    <tr>
+                                        <td
+                                            class="w-15 p-2 fs-14 border border-dark border-top-0 clr-boston-red ff-p-sb pt-1">
+                                            {{name.name}}
+                                        </td>
+                                        <td style="cursor: pointer;"
+                                            class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 clr-boston-red ff-p-sb pt-1">
+                                            {{name.status}}
+                                        </td>
+                                        <td
+                                            class="w-15 p-2 fs-14 border border-dark border-top-0 border-start-0 text-dark ff-p-sb pt-1">
+                                            {{name.replica}}
+                                        </td>
+
+                                        <td
+                                            class="w-10 p-2 fs-14 border border-dark border-top-0 border-start-0 ff-p-sb pt-1">
+                                            {{name.cpu}}
+                                        </td>
+                                        <td
+                                            class="w-10 p-2 fs-14 border border-dark border-top-0  border-start-0 ff-p-sb pt-1">
+                                            {{name.memory}}
+                                        </td>
+                                        <td
+                                            class="w-20 p-2 fs-14 border border-dark border-top-0 text-black ff-p-sb pt-1">
+                                            {{name.createdBy}}
+                                        </td>
+                                        <td
+                                            class="w-15 p-2 fs-14 border border-dark border-top-0 text-black ff-p-sb pt-1">
+                                            {{name.deployedOn}}
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </td>
                 </tr>

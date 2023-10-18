@@ -144,6 +144,11 @@ body {
     width: 90%;
 }
 
+.w-98 {
+    width: 98%;
+}
+
+
 .cr-pointer {
     cursor: pointer;
 }

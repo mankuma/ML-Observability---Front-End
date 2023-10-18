@@ -11,8 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { TableauModule } from 'ngx-tableau';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { MsalModule } from '@azure/msal-angular';
-import { environment } from './environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,18 +27,7 @@ import { environment } from './environments/environment';
     HttpClientModule,
     TableauModule,
     NgSelectModule,
-    // MsalModule.forRoot({
-    //   auth: {
-    //     clientId: environment.clientId,
-    //     authority: "https://login.microsoftonline.com" + "/" + environment.tenantId,
-    //     navigateToLoginRequestUrl: true,
-    //     redirectUri: '',
-    //   },
-    //   cache: {
-    //     cacheLocation: 'localStorage',
-    //     storeAuthStateInCookie: isIE, // set to true for IE 11
-    //   }
-    // }, null, null)
+
   ],
   providers: [
     AuthGuard,
