@@ -44,6 +44,24 @@ export class DetailsComponent implements OnInit {
       count: 0,
       fullcount: 0,
       key: "emails_am_branch"
+    },
+    {
+      name: 'Emails Quote',
+      count: 0,
+      fullcount: 0,
+      key: "emails_quote_am"
+    },
+    {
+      name: 'Emails Shipment',
+      count: 0,
+      fullcount: 0,
+      key: "emails_shipment_ct"
+    },
+    {
+      name: 'Emails AM Shipment',
+      count: 0,
+      fullcount: 0,
+      key: "emails_shipment_am"
     }
   ];
 
