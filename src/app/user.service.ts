@@ -94,7 +94,7 @@ export class UserService {
       '& email_body_nosig_ascii_cleaned=' + question +
       '& email_date=' + new Date().toJSON()
 
-    return this.http.get(api, { responseType: 'text' });
+    return this.http.post(api, { responseType: 'text' });
   }
 
 
