@@ -18,6 +18,7 @@ export class DetailsComponent implements OnInit {
   routerName: string = '';
   public kpiCards: any[] = [];
   public selectedTab: string = '';
+  public selectedCounter: string = 'shipment';
 
   public list = [
     {
@@ -45,14 +46,26 @@ export class DetailsComponent implements OnInit {
       fullcount: 0,
       key: "emails_am_branch"
     },
+  ];
+
+  emailQuotes = [
     {
-      name: 'Emails Quote',
+      name: 'Emails Customer Quotes',
+      count: 0,
+      fullcount: 0,
+      key: "emails_quote_ct"
+    },
+    {
+      name: 'Emails AM Quotes',
       count: 0,
       fullcount: 0,
       key: "emails_quote_am"
     },
+  ];
+
+  emailShipments = [
     {
-      name: 'Emails Shipment',
+      name: 'Emails Customer Shipments',
       count: 0,
       fullcount: 0,
       key: "emails_shipment_ct"
@@ -65,7 +78,17 @@ export class DetailsComponent implements OnInit {
     }
   ];
 
+  emailFrauds = [
+    {
+      name: 'Emails Customer Fraud',
+      count: 5,
+      fullcount: 20,
+      key: ""
+    }
+  ]
+
   viewData: any[] = [];
+  bindCounters: any[] = [];
 
   constructor(private userService: UserService, private router: Router) {
 
@@ -110,8 +133,22 @@ export class DetailsComponent implements OnInit {
         }
         dataval.push(res);
       });
+      this.emailShipments.map((x: any) => {
+        let dup = values.filter(k => k.name.toLowerCase() === x.key.toLowerCase());
+        let arr1 = dup.filter(k => k.time === 15);
+        let arr2 = dup.filter(k => k.time === 24);
+        x['count'] = arr1.length != 0 ? arr1[0]['count'] : 0;
+        x['fullcount'] = arr2.length != 0 ? arr2[0]['count'] : 0;
+      });
+      this.emailQuotes.map((x: any) => {
+        let dup = values.filter(k => k.name.toLowerCase() === x.key.toLowerCase());
+        let arr1 = dup.filter(k => k.time === 15);
+        let arr2 = dup.filter(k => k.time === 24);
+        x['count'] = arr1.length != 0 ? arr1[0]['count'] : 0;
+        x['fullcount'] = arr2.length != 0 ? arr2[0]['count'] : 0;
+      });
       this.kpiCards = [...dataval];
-
+      this.tab(this.selectedCounter);
 
     });
 
@@ -229,6 +266,17 @@ export class DetailsComponent implements OnInit {
         this.intialLoad();
       })
 
+    }
+  }
+
+  public tab(name: string) {
+    this.selectedCounter = name;
+    if (name === 'shipment') {
+      this.bindCounters = [...this.emailShipments];
+    } else if (name === 'quote') {
+      this.bindCounters = [...this.emailQuotes];
+    } else {
+      this.bindCounters = [...this.emailFrauds];
     }
   }
 

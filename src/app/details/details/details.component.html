@@ -14,9 +14,50 @@
             </div>
         </div>
     </div>
-    <div style="overflow-x: auto; width:100%" class="mb-2" *ngIf="routerName === 'amanada_details'">
+    <div style="overflow-x: auto; width:100%" class="mb-3" *ngIf="routerName === 'amanada_details'">
         <div class="row ms-0 me-0 mt-1 mb-1 flex-nowrap">
             <div *ngFor="let x of kpiCards; let i = index;" class="col-lg-3">
+                <div class="bx-shadow-black" [ngStyle]="{'background': '#ffffff'}">
+                    <p
+                        class="text-left fw-bolder fs-18 pt-2 px-2 clr-boston-red mb-0 w-100 d-flex align-items-center justify-content-between">
+                        {{x.name}}
+                    </p>
+                    <table class="w-100 border-0">
+                        <tr class="w-100">
+                            <td class="fs-14 fw-bolder text-dark ps-2 w-35">Last 15 Mins: </td>
+                            <td class="text-left fw-normal fs-24 clr-yellow mb-0 w-65">{{x.count}}</td>
+                        </tr>
+                    </table>
+                    <table class="w-100 border-0">
+                        <tr class="w-100">
+                            <td class="fs-14 fw-bolder text-dark ps-2 w-35">Last 24 Hours: </td>
+                            <td class="text-left fw-normal fs-24 clr-yellow mb-0 w-65">{{x.fullcount}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3" *ngIf="routerName === 'amanada_details'">
+        <div class="row ms-0 me-0 mt-1 mb-1 bg-white bx-shadow-black py-2 px-1"
+            *ngIf="routerName === 'amanada_details'">
+            <div class="col-lg-12">
+                <span class="cr-pointer py-2 px-4 fs-14" (click)="tab('shipment')" [ngClass]="{'bg-red': selectedCounter === 'shipment', 
+                    'text-white': selectedCounter === 'shipment', 'text-dark': selectedCounter !== 'shipment'}">
+                    Shipment</span>
+                <span class="cr-pointer py-2 px-3 fs-14" (click)="tab('quote')" [ngClass]="{'bg-red': selectedCounter === 'quote', 'text-white': selectedCounter === 'quote', 
+                    'text-dark': selectedCounter !== 'quote'}">
+                    Quote</span>
+                <span class="cr-pointer py-2 px-3 fs-14" (click)="tab('fraud')" [ngClass]="{'bg-red': selectedCounter === 'fraud', 'text-white': selectedCounter === 'fraud', 
+                    'text-dark': selectedCounter !== 'fraud'}">
+                    Fraud</span>
+            </div>
+        </div>
+
+
+        <div class="row ms-0 me-0 mt-1 mb-1 flex-nowrap">
+            <div *ngFor="let x of bindCounters; let i = index;" class="col-lg-3">
                 <div class="bx-shadow-black" [ngStyle]="{'background': '#ffffff'}">
                     <p
                         class="text-left fw-bolder fs-18 pt-2 px-2 clr-boston-red mb-0 w-100 d-flex align-items-center justify-content-between">

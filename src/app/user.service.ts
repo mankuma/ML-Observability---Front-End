@@ -99,12 +99,15 @@ export class UserService {
 
 
   public checkResponse() {
-    let headers = { Authorization: 'apikey R6j3HUbEuP04AsTtsVJYycwP8GkyS569K5JHPKAjArGEiYqp' };
+
+    //let headers = { Authorization: 'apikey R6j3HUbEuP04AsTtsVJYycwP8GkyS569K5JHPKAjArGEiYqp' };
+    let headers = { Authorization: 'apikey hbkZ8LJihj8rcem7uOxhmsySUTEmpOuFb3r0FRzGPWZhnYFB' };
     //let obj = { "accessKey": "mbalfdt1cpcrmh7ok4dfj78f8yoset6m", "request": { "email_body": "get the shipment details of 324ret3t" } }
     // let obj = { "accessKey": "mf43mj2foj38tbdtbky0l60vpr30n0pb", "request": { "email_body": "create a quote for me" } };
-    return this.http.get('http://modelvisualizationtesting.cdswdev.corp.cdw.com/arc/api/data?version=1&dsreq=' + { "version": 1, "highlighting": false, "type": "SQL", "limit": 100, "dimensions": [{ "type": "SIMPLE", "expr": "[project_name] as 'project_name'" }, { "type": "SIMPLE", "expr": "[num_of_models] as 'num_of_models'" }, { "type": "SIMPLE", "expr": "[num_of_cores] as 'num_of_cores'" }, { "type": "SIMPLE", "expr": "[memmory_in_gb] as 'memmory_in_gb'" }, { "type": "SIMPLE", "expr": "[nvidia_gpus] as 'nvidia_gpus'" }, { "type": "SIMPLE", "expr": "[numreplicas] as 'numreplicas'" }], "ksqlStreamPosition": "", "dataset_id": 15 }, { headers: new HttpHeaders(headers) })
+    //return this.http.get('http://modelvisualizationtesting.cdswdev.corp.cdw.com/arc/api/data?version=1&dsreq=' + { "version": 1, "highlighting": false, "type": "SQL", "limit": 100, "dimensions": [{ "type": "SIMPLE", "expr": "[project_name] as 'project_name'" }, { "type": "SIMPLE", "expr": "[num_of_models] as 'num_of_models'" }, { "type": "SIMPLE", "expr": "[num_of_cores] as 'num_of_cores'" }, { "type": "SIMPLE", "expr": "[memmory_in_gb] as 'memmory_in_gb'" }, { "type": "SIMPLE", "expr": "[nvidia_gpus] as 'nvidia_gpus'" }, { "type": "SIMPLE", "expr": "[numreplicas] as 'numreplicas'" }], "ksqlStreamPosition": "", "dataset_id": 15 }, { headers: new HttpHeaders(headers) })
     // return this.http.post('http://modelservice.cdsw.corp.cdw.com/model', obj);
     //we can help you on shipment tracking and creating quotes
+    return this.http.get('http://satyaviz.cdswdev.corp.cdw.com/arc/api/data?version=1&dsreq=' + JSON.stringify({ "version": 1, "highlighting": false, "type": "SQL", "limit": 100, "dimensions": [{ "type": "SIMPLE", "expr": "[project_name] as 'project_name'" }], "dataset_id": 18 }), { headers: new HttpHeaders(headers) })
   }
 
   public modelResponse(obj: any) {
