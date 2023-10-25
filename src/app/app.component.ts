@@ -124,7 +124,7 @@ export class AppComponent implements OnInit {
 
   getResponseFromNifi(message: string) {
     let chatMessage: any = {};
-    this.userService.getchatbot(this.concatenate(this.type, message)).subscribe((response: any) => {
+    this.userService.getchatbot(message).subscribe((response: any) => {
       this.actionRequired = true;
       this.loader = false;
       if (response != undefined && response != null) {
